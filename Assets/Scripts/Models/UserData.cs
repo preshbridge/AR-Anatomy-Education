@@ -3,25 +3,34 @@ using System;
 [Serializable]
 public class UserData
 {
-    public string FirstName;
-    public string MiddleName;
-    public string Surname;
-    public int Age;
-    public string Email;
-    public string DateCreated;
+    public string userId;
+    public string firstName;
+    public string middleName;
+    public string surname;
+    public string email;
+    public int age;
+    public string createdAt;
 
     public UserData()
     {
+
     }
 
-    public UserData(string firstName, string middleName, string surname,
-                    int age, string email)
+    public UserData(
+        string userId,
+        string firstName,
+        string middleName,
+        string surname,
+        string email,
+        int age)
     {
-        FirstName = firstName;
-        MiddleName = middleName;
-        Surname = surname;
-        Age = age;
-        Email = email;
-        DateCreated = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss");
+        this.userId = userId;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.surname = surname;
+        this.email = email;
+        this.age = age;
+
+        createdAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
     }
 }
