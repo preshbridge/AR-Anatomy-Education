@@ -1,3 +1,4 @@
+@"
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
@@ -18,3 +19,25 @@ Assets/AssetStoreTools*
 *.sln
 *.user
 *.tmp
+
+# Firebase SDK files
+Assets/Firebase/
+Assets/Firebase.meta
+Assets/google-services.json
+Assets/google-services.json.meta
+Firebase/
+google-services.json
+GoogleService-Info.plist
+*.apk
+*.ipa
+*.aar
+*.jar
+*.framework
+*.dylib
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+"@ | Out-File -FilePath .gitignore -Encoding utf8

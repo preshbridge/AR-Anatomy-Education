@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "500788967954",
+    "project_id": "ar-anatomy-education",
+    "storage_bucket": "ar-anatomy-education.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:500788967954:android:422fb6961e6bb8f66636cb",
+        "android_client_info": {
+          "package_name": "com.chimdinma.aranatomyeducation"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4hT4bn5mfVoo1nSybXlP9bVp-QW6K83s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
