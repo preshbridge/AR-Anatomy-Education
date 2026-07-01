@@ -1,10 +1,8 @@
 using UnityEngine;
-using Firebase;
 using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Extensions;
 using System;
-using System.Collections.Generic;
 
 public class AuthenticationManager : MonoBehaviour
 {
@@ -34,69 +32,95 @@ public class AuthenticationManager : MonoBehaviour
     private void Start()
     {
         Auth = FirebaseAuth.DefaultInstance;
-
         Database = FirebaseDatabase.DefaultInstance.RootReference;
 
         Debug.Log("✅ Authentication Manager Ready");
     }
 
+    // ==========================
+    // REGISTER USER
+    // ==========================
+
     public void RegisterUser(
-    string firstName,
-    string middleName,
-    string surname,
-    int age,
-    string email,
-    string password,
-    Action<bool, string> callback)
+        string firstName,
+        string middleName,
+        string surname,
+        int age,
+        string email,
+        string password,
+        Action<bool, string> callback)
+    {
+        Auth.CreateUserWithEmailAndPasswordAsync(email, password)
+            .ContinueWithOnMainThread(task =>
+            {
+                if (task.IsCanceled)
+                {
+                    callback(false, "Registration cancelled.");
+                    return;
+                }
+
+                if (task.IsFaulted)
+                {
+                    string error = task.Exception.Flatten().InnerExceptions[0].Message;
+
+if (error.Contains("EMAIL_EXISTS") || error.Contains("already"))
 {
-    Auth.CreateUserWithEmailAndPasswordAsync(email, password)
-        .ContinueWithOnMainThread(task =>
-        {
-            if (task.IsCanceled)
-            {
-                callback(false, "Registration cancelled.");
-                return;
-            }
+    callback(false, "This email is already registered.");
+}
+else if (error.Contains("INVALID_EMAIL"))
+{
+    callback(false, "Invalid email address.");
+}
+else if (error.Contains("WEAK_PASSWORD"))
+{
+    callback(false, "Password is too weak.");
+}
+else
+{
+    callback(false, error);
+}
+                    return;
+                }
 
-            if (task.IsFaulted)
-            {
-                callback(false, task.Exception.Flatten().InnerExceptions[0].Message);
-                return;
-            }
+                FirebaseUser user = task.Result.User;
 
-            FirebaseUser user = task.Result.User;
+                UserData newUser = new UserData(
+                    user.UserId,
+                    firstName,
+                    middleName,
+                    surname,
+                    email,
+                    age
+                );
 
-            UserData newUser = new UserData(
-                user.UserId,
-                firstName,
-                middleName,
-                surname,
-                email,
-                age
-            );
+                string json = JsonUtility.ToJson(newUser);
 
-            string json = JsonUtility.ToJson(newUser);
-
-            Database.Child("Users")
+                Database.Child("Users")
                     .Child(user.UserId)
                     .SetRawJsonValueAsync(json)
-                    .ContinueWithOnMainThread(dbTask =>
+                    .ContinueWithOnMainThread(databaseTask =>
                     {
-                        if (dbTask.IsCompleted)
+                        if (databaseTask.IsFaulted)
                         {
-                            user.SendEmailVerificationAsync()
-                                .ContinueWithOnMainThread(emailTask =>
+                            callback(false, "Failed to save user information.");
+                            return;
+                        }
+
+                        user.SendEmailVerificationAsync()
+                            .ContinueWithOnMainThread(emailTask =>
+                            {
+                                if (emailTask.IsCompleted)
                                 {
                                     callback(true,
-                                        "Account created successfully! Please verify your email.");
-                                });
-                        }
-                        else
-                        {
-                            callback(false,
-                                "Failed to save user information.");
-                        }
+                                        "Account created successfully! Please verify your email before logging in.");
+                                }
+                                else
+                                {
+                                    callback(false,
+                                        "Account created, but verification email could not be sent.");
+                                }
+                            });
                     });
-        });
-}
+            });
+    }
 }
