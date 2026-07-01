@@ -22,17 +22,25 @@ public class SignUpController : MonoBehaviour
     public Button loginButton;
 
     [Header("UI")]
-    public TMP_Text messageText;
+    public GameObject signUpPanel;
     public GameObject loadingPanel;
+    public TMP_Text messageText;
 
     private void Start()
     {
+        // Hide loading panel when scene starts
         if (loadingPanel != null)
             loadingPanel.SetActive(false);
 
+        // Show Sign Up panel
+        if (signUpPanel != null)
+            signUpPanel.SetActive(true);
+
+        // Clear message
         if (messageText != null)
             messageText.text = "";
 
+        // Button listeners
         if (createAccountButton != null)
             createAccountButton.onClick.AddListener(OnCreateAccountClicked);
 
@@ -62,7 +70,7 @@ public class SignUpController : MonoBehaviour
             return;
         }
 
-        // Check empty fields
+        // Check required fields
         if (string.IsNullOrEmpty(firstName) ||
             string.IsNullOrEmpty(surname) ||
             string.IsNullOrEmpty(email) ||
@@ -73,7 +81,7 @@ public class SignUpController : MonoBehaviour
             return;
         }
 
-        // Passwords match
+        // Check passwords match
         if (password != confirmPassword)
         {
             ShowMessage("Passwords do not match.", Color.red);
@@ -94,19 +102,24 @@ public class SignUpController : MonoBehaviour
             return;
         }
 
-        // Terms & Conditions
+        // Terms and Conditions
         if (termsToggle == null || !termsToggle.isOn)
         {
             ShowMessage("Please accept the Terms and Conditions before creating an account.", Color.red);
             return;
         }
 
-        // Show loading
+        // Hide Sign Up UI
+        if (signUpPanel != null)
+            signUpPanel.SetActive(false);
+
+        // Show Loading UI
         if (loadingPanel != null)
             loadingPanel.SetActive(true);
 
         createAccountButton.interactable = false;
 
+        // Register user with Firebase
         AuthenticationManager.Instance.RegisterUser(
             firstName,
             middleName,
@@ -120,6 +133,7 @@ public class SignUpController : MonoBehaviour
 
     private void OnRegistrationCompleted(bool success, string message)
     {
+        // Hide Loading
         if (loadingPanel != null)
             loadingPanel.SetActive(false);
 
@@ -129,11 +143,15 @@ public class SignUpController : MonoBehaviour
         {
             ShowMessage(message, Color.green);
 
-            // Return to Login Scene after 3 seconds
+            // Go to Login Scene after 3 seconds
             Invoke(nameof(OpenLoginScene), 3f);
         }
         else
         {
+            // Show Sign Up screen again
+            if (signUpPanel != null)
+                signUpPanel.SetActive(true);
+
             ShowMessage(message, Color.red);
         }
     }
