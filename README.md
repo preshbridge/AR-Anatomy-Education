@@ -20,5 +20,13 @@ This project is an interactive mobile application designed to aid Nigerian stude
 
 #### Step-by-Step Instructions
 1.  **Clone the Repository:**
-    ```bash
-    git clone https://github.com/yourusername/your-repo-name.git
+    
+    git clone https://github.com/preshbridge/AR-Anatomy-Education.git
+
+    Open the project in either VS Code or Unity
+
+    Go through the code and Ui
+    
+PHONE VIDEO:
+
+APK LINK:
