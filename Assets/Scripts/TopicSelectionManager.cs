@@ -3,27 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class TopicSelectionManager : MonoBehaviour
 {
-    // Stores the topic the user selected
-    public static string SelectedTopic;
+    // Stores the topic selected by the user
+    public static string SelectedTopic = "";
 
-    // Called when Shoulder is selected
-    public void SelectShoulder()
+    // Opens the TopicScene and remembers the topic
+    public void OpenTopic(string topicName)
     {
-        SelectedTopic = "Shoulder";
-        SceneManager.LoadScene("TopicScene");
-    }
+        SelectedTopic = topicName;
 
-    // Called when Upper Arm is selected
-    public void SelectUpperArm()
-    {
-        SelectedTopic = "Upper Arm";
-        SceneManager.LoadScene("TopicScene");
-    }
+        Debug.Log("Selected Topic: " + SelectedTopic);
 
-    // Called when Forearm is selected
-    public void SelectForearm()
-    {
-        SelectedTopic = "Forearm";
         SceneManager.LoadScene("TopicScene");
     }
 }

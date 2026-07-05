@@ -1,52 +1,43 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class TopicSceneManager : MonoBehaviour
 {
-    [Header("Muscle Cards")]
-    public Button[] muscleCards;
+    [Header("Panels")]
+    public GameObject shoulderPanel;
+    public GameObject upperArmPanel;
+    public GameObject forearmPanel;
 
-    [Header("Start Learning Button")]
+    [Header("Start Learning")]
     public Button startLearningButton;
 
-    private int selectedCard = -1;
+   private void Start()
+{
+    Debug.Log("Topic received: " + TopicSelectionManager.SelectedTopic);
 
-    private void Start()
+    startLearningButton.interactable = false;
+
+    shoulderPanel.SetActive(false);
+    upperArmPanel.SetActive(false);
+    forearmPanel.SetActive(false);
+
+    switch (TopicSelectionManager.SelectedTopic)
     {
-        // Disable Start Learning
-        startLearningButton.interactable = false;
+        case "Shoulder":
+            shoulderPanel.SetActive(true);
+            break;
 
-        // Add click listeners to every muscle card
-        for (int i = 0; i < muscleCards.Length; i++)
-        {
-            int index = i;
-            muscleCards[i].onClick.AddListener(() => SelectCard(index));
-        }
+        case "Upper Arm":
+            upperArmPanel.SetActive(true);
+            break;
+
+        case "Forearm":
+            forearmPanel.SetActive(true);
+            break;
+
+        default:
+            shoulderPanel.SetActive(true);
+            break;
     }
-
-    void SelectCard(int index)
-    {
-        selectedCard = index;
-
-        // Enable Start Learning
-        startLearningButton.interactable = true;
-
-        // Highlight selected card
-        for (int i = 0; i < muscleCards.Length; i++)
-        {
-            ColorBlock colors = muscleCards[i].colors;
-
-            if (i == index)
-            {
-                colors.normalColor = new Color(0.75f, 1f, 0.75f); // Light green
-            }
-            else
-            {
-                colors.normalColor = Color.white;
-            }
-
-            muscleCards[i].colors = colors;
-        }
-    }
+}
 }
