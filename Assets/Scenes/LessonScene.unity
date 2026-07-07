@@ -339,7 +339,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1641089672}
         m_TargetAssemblyTypeName: HomeSceneManager, Assembly-CSharp
         m_MethodName: OpenStudy
         m_Mode: 1
@@ -1162,7 +1162,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1641089672}
         m_TargetAssemblyTypeName: HomeSceneManager, Assembly-CSharp
         m_MethodName: OpenAR
         m_Mode: 1
@@ -1429,7 +1429,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1641089672}
         m_TargetAssemblyTypeName: HomeSceneManager, Assembly-CSharp
         m_MethodName: OpenProfile
         m_Mode: 1
@@ -3568,7 +3568,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1641089672}
         m_TargetAssemblyTypeName: HomeSceneManager, Assembly-CSharp
         m_MethodName: OpenQuiz
         m_Mode: 1
@@ -4357,6 +4357,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1607860335}
   m_CullTransparentMesh: 1
+--- !u!1 &1641089671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1641089673}
+  - component: {fileID: 1641089672}
+  m_Layer: 0
+  m_Name: HomeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1641089672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641089671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34471b1561e9fdf4c98ab6dd069e72c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1641089673
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641089671}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 58.191208, y: 1180.5596, z: -118.00586}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1687131358
 GameObject:
   m_ObjectHideFlags: 0
@@ -4964,7 +5008,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1641089672}
         m_TargetAssemblyTypeName: HomeSceneManager, Assembly-CSharp
         m_MethodName: OpenHome
         m_Mode: 1
@@ -5714,6 +5758,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e091af1ef4a64a43917bcbe709186fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shoulderLessonPanel: {fileID: 149259924}
+  upperArmLessonPanel: {fileID: 325480432}
+  forearmLessonPanel: {fileID: 1687131358}
   muscleTitle: {fileID: 1791238487}
   descriptionText: {fileID: 280117710}
   functionText: {fileID: 1975383023}
@@ -6144,3 +6191,4 @@ SceneRoots:
   - {fileID: 724983549}
   - {fileID: 1594838557}
   - {fileID: 2004735078}
+  - {fileID: 1641089673}

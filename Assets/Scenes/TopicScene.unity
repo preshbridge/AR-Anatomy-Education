@@ -339,7 +339,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 194902677}
         m_TargetAssemblyTypeName: HomeSceneManager, Assembly-CSharp
         m_MethodName: OpenHome
         m_Mode: 1
@@ -473,7 +473,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 130145927}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 330578776}
+        m_TargetAssemblyTypeName: TopicSceneManager, Assembly-CSharp
+        m_MethodName: SelectMuscle
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Biceps Brachii
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &130145927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -939,6 +951,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 190564100}
   m_CullTransparentMesh: 1
+--- !u!1 &194902676
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 194902678}
+  - component: {fileID: 194902677}
+  m_Layer: 0
+  m_Name: HomeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &194902677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194902676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34471b1561e9fdf4c98ab6dd069e72c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &194902678
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194902676}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 58.191208, y: 1180.5596, z: -118.00586}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &207197752
 GameObject:
   m_ObjectHideFlags: 0
@@ -1692,7 +1748,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 194902677}
         m_TargetAssemblyTypeName: HomeSceneManager, Assembly-CSharp
         m_MethodName: OpenProfile
         m_Mode: 1
@@ -1826,7 +1882,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 441588884}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 330578776}
+        m_TargetAssemblyTypeName: TopicSceneManager, Assembly-CSharp
+        m_MethodName: SelectMuscle
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Palmaris Longus
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &441588884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2217,7 +2285,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 555499152}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 330578776}
+        m_TargetAssemblyTypeName: TopicSceneManager, Assembly-CSharp
+        m_MethodName: SelectMuscle
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Brachialis
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &555499152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2549,7 +2629,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 639281604}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 330578776}
+        m_TargetAssemblyTypeName: TopicSceneManager, Assembly-CSharp
+        m_MethodName: SelectMuscle
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Triceps Brachii
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &639281604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3245,7 +3337,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 194902677}
         m_TargetAssemblyTypeName: HomeSceneManager, Assembly-CSharp
         m_MethodName: OpenStudy
         m_Mode: 1
@@ -3454,7 +3546,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 877553911}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 330578776}
+        m_TargetAssemblyTypeName: TopicSceneManager, Assembly-CSharp
+        m_MethodName: SelectMuscle
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Flexor Carpi Radialis
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &877553911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4173,7 +4277,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1094794574}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 330578776}
+        m_TargetAssemblyTypeName: TopicSceneManager, Assembly-CSharp
+        m_MethodName: SelectMuscle
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Deltoid
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1094794574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4543,7 +4659,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1213207374}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 330578776}
+        m_TargetAssemblyTypeName: TopicSceneManager, Assembly-CSharp
+        m_MethodName: SelectMuscle
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Infraspinatus
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1261220935
 GameObject:
   m_ObjectHideFlags: 0
@@ -4970,7 +5098,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 194902677}
         m_TargetAssemblyTypeName: HomeSceneManager, Assembly-CSharp
         m_MethodName: OpenQuiz
         m_Mode: 1
@@ -5994,7 +6122,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1461612977}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 330578776}
+        m_TargetAssemblyTypeName: TopicSceneManager, Assembly-CSharp
+        m_MethodName: SelectMuscle
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Subscapularis
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1473972629
 GameObject:
   m_ObjectHideFlags: 0
@@ -6958,7 +7098,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1735513632}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 330578776}
+        m_TargetAssemblyTypeName: TopicSceneManager, Assembly-CSharp
+        m_MethodName: SelectMuscle
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Coracobrachialis
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1735513632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7292,7 +7444,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1787987904}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 330578776}
+        m_TargetAssemblyTypeName: TopicSceneManager, Assembly-CSharp
+        m_MethodName: SelectMuscle
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Supraspinatus
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1840843936
 GameObject:
   m_ObjectHideFlags: 0
@@ -7377,7 +7541,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1840843939}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 330578776}
+        m_TargetAssemblyTypeName: TopicSceneManager, Assembly-CSharp
+        m_MethodName: SelectMuscle
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Flexor Carpi Ulnaris
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1840843939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7497,7 +7673,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1863295575}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 330578776}
+        m_TargetAssemblyTypeName: TopicSceneManager, Assembly-CSharp
+        m_MethodName: StartLearning
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1863295575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7867,7 +8055,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1992713116}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 330578776}
+        m_TargetAssemblyTypeName: TopicSceneManager, Assembly-CSharp
+        m_MethodName: SelectMuscle
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Teres Minor
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2018669116
 GameObject:
   m_ObjectHideFlags: 0
@@ -7952,7 +8152,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2018669119}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 330578776}
+        m_TargetAssemblyTypeName: TopicSceneManager, Assembly-CSharp
+        m_MethodName: SelectMuscle
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 'Brachioradialis '
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2018669119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8283,7 +8495,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 194902677}
         m_TargetAssemblyTypeName: HomeSceneManager, Assembly-CSharp
         m_MethodName: OpenAR
         m_Mode: 1
@@ -8610,3 +8822,4 @@ SceneRoots:
   - {fileID: 1042200246}
   - {fileID: 259667719}
   - {fileID: 330578777}
+  - {fileID: 194902678}
