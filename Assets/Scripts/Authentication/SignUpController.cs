@@ -132,29 +132,29 @@ public class SignUpController : MonoBehaviour
     }
 
     private void OnRegistrationCompleted(bool success, string message)
+{
+    // Hide Loading
+    if (loadingPanel != null)
+        loadingPanel.SetActive(false);
+
+    createAccountButton.interactable = true;
+
+    if (success)
     {
-        // Hide Loading
-        if (loadingPanel != null)
-            loadingPanel.SetActive(false);
+        ShowMessage(message, Color.green);
 
-        createAccountButton.interactable = true;
-
-        if (success)
-        {
-            ShowMessage(message, Color.green);
-
-            // Go to Login Scene after 3 seconds
-            Invoke(nameof(OpenLoginScene), 3f);
-        }
-        else
-        {
-            // Show Sign Up screen again
-            if (signUpPanel != null)
-                signUpPanel.SetActive(true);
-
-            ShowMessage(message, Color.red);
-        }
+        // Give the user a moment to read the success message
+        Invoke(nameof(OpenLoginScene), 1.2f);
     }
+    else
+    {
+        // Show Sign Up screen again
+        if (signUpPanel != null)
+            signUpPanel.SetActive(true);
+
+        ShowMessage(message, Color.red);
+    }
+}
 
     private void ShowMessage(string message, Color color)
     {

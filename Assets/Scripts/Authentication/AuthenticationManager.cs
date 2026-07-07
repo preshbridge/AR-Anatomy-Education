@@ -30,12 +30,28 @@ public class AuthenticationManager : MonoBehaviour
     }
 
     private void Start()
+{
+    if (FirebaseManager.Instance != null && FirebaseManager.Instance.IsFirebaseReady)
     {
-        Auth = FirebaseAuth.DefaultInstance;
-        Database = FirebaseDatabase.DefaultInstance.RootReference;
-
-        Debug.Log("✅ Authentication Manager Ready");
+        InitializeAuth();
     }
+    else if (FirebaseManager.Instance != null)
+    {
+        FirebaseManager.Instance.OnFirebaseReady += InitializeAuth;
+    }
+    else
+    {
+        Debug.LogError("FirebaseManager not found in the scene.");
+    }
+}
+
+private void InitializeAuth()
+{
+    Auth = FirebaseAuth.DefaultInstance;
+    Database = FirebaseDatabase.DefaultInstance.RootReference;
+
+    Debug.Log("✅ Authentication Manager Ready");
+}
 
     // ==========================
     // REGISTER USER
@@ -123,4 +139,78 @@ else
                     });
             });
     }
+    // ==========================
+// LOGIN USER
+// ==========================
+
+public void LoginUser(string email, string password, Action<bool, string> callback)
+{
+    Auth.SignInWithEmailAndPasswordAsync(email, password)
+        .ContinueWithOnMainThread(task =>
+        {
+            if (task.IsCanceled)
+            {
+                callback(false, "Login cancelled.");
+                return;
+            }
+
+            if (task.IsFaulted)
+            {
+                string error = task.Exception.Flatten().InnerExceptions[0].Message;
+
+                if (error.Contains("INVALID_LOGIN_CREDENTIALS") || error.Contains("password is invalid") || error.Contains("no user record"))
+                {
+                    callback(false, "Incorrect email or password.");
+                }
+                else if (error.Contains("INVALID_EMAIL"))
+                {
+                    callback(false, "Invalid email address.");
+                }
+                else if (error.Contains("USER_DISABLED"))
+                {
+                    callback(false, "This account has been disabled.");
+                }
+                else
+                {
+                    callback(false, error);
+                }
+                return;
+            }
+
+            FirebaseUser user = task.Result.User;
+
+            // Reload to get the latest email verification status
+            user.ReloadAsync().ContinueWithOnMainThread(reloadTask =>
+            {
+                bool isVerified = user.IsEmailVerified;
+
+                // Fetch the user's stored profile data ("memories") from the database
+                Database.Child("Users").Child(user.UserId).GetValueAsync()
+                    .ContinueWithOnMainThread(dbTask =>
+                    {
+                        if (dbTask.IsFaulted || !dbTask.Result.Exists)
+                        {
+                            callback(false, "Could not load your profile. Please try again.");
+                            return;
+                        }
+
+                        string json = dbTask.Result.GetRawJsonValue();
+                        UserData data = JsonUtility.FromJson<UserData>(json);
+
+                        if (UserSession.Instance != null)
+                        {
+                            UserSession.Instance.SetUser(data, isVerified);
+                        }
+
+                        if (!isVerified)
+                        {
+                            callback(false, "Please verify your email before logging in. Check your inbox.");
+                            return;
+                        }
+
+                        callback(true, "Login successful!");
+                    });
+            });
+        });
+}
 }

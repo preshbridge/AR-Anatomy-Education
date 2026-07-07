@@ -53,10 +53,24 @@ public class LoginController : MonoBehaviour
         LoadRememberedEmail();
     }
 
-    private void OnLoginClicked()
+   private void OnLoginClicked()
+{
+    string email = emailInput.text.Trim();
+    string password = passwordInput.text;
+
+    if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
     {
-        Debug.Log("Login button clicked.");
+        ShowMessage("Please enter your email and password.", Color.red);
+        return;
     }
+
+    if (loadingPanel != null)
+        loadingPanel.SetActive(true);
+
+    loginAccountButton.interactable = false;
+
+    AuthenticationManager.Instance.LoginUser(email, password, OnLoginCompleted);
+}
 
     private void OnForgotPasswordClicked()
     {
@@ -94,4 +108,36 @@ public class LoginController : MonoBehaviour
             messageText.color = color;
         }
     }
+    private void OnLoginCompleted(bool success, string message)
+{
+    if (loadingPanel != null)
+        loadingPanel.SetActive(false);
+
+    loginAccountButton.interactable = true;
+
+    if (success)
+    {
+        ShowMessage(message, Color.green);
+
+        if (rememberMeToggle != null && rememberMeToggle.isOn)
+        {
+            PlayerPrefs.SetString("RememberedEmail", emailInput.text.Trim());
+        }
+        else
+        {
+            PlayerPrefs.DeleteKey("RememberedEmail");
+        }
+
+        Invoke(nameof(OpenHomeScene), 1f);
+    }
+    else
+    {
+        ShowMessage(message, Color.red);
+    }
+}
+
+private void OpenHomeScene()
+{
+    SceneManager.LoadScene("HomeScene");
+}
 }

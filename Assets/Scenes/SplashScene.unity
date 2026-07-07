@@ -606,6 +606,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fead4b177cb360645bd14c15972cd65c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectedMuscleGroup: 
+  SelectedMuscle: 
 --- !u!1 &687987430
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,6 +924,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1610693276
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1610693278}
+  - component: {fileID: 1610693277}
+  m_Layer: 0
+  m_Name: UserSession
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1610693277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610693276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6114cd8f6208114b86e1de07073fa76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserId: 
+  FirstName: 
+  MiddleName: 
+  Surname: 
+  Email: 
+  Age: 0
+  IsEmailVerified: 0
+--- !u!4 &1610693278
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610693276}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 980.03815, y: 1085.4913, z: -31.759277}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2036316283
 GameObject:
   m_ObjectHideFlags: 0
@@ -1024,3 +1077,4 @@ SceneRoots:
   - {fileID: 154445330}
   - {fileID: 1469864098}
   - {fileID: 617092133}
+  - {fileID: 1610693278}
