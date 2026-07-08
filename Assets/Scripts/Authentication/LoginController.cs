@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class LoginController : MonoBehaviour
 {
     [Header("Input Fields")]
-    public TMP_InputField emailInput;
+    public TMP_InputField usernameInput;
     public TMP_InputField passwordInput;
 
     [Header("Toggles")]
@@ -30,14 +30,12 @@ public class LoginController : MonoBehaviour
         if (messageText != null)
             messageText.text = "";
 
-        // Hide password by default
         if (passwordInput != null)
         {
             passwordInput.contentType = TMP_InputField.ContentType.Password;
             passwordInput.ForceLabelUpdate();
         }
 
-        // Button events
         if (loginAccountButton != null)
             loginAccountButton.onClick.AddListener(OnLoginClicked);
 
@@ -50,36 +48,79 @@ public class LoginController : MonoBehaviour
         if (showPasswordToggle != null)
             showPasswordToggle.onValueChanged.AddListener(TogglePasswordVisibility);
 
-        LoadRememberedEmail();
+        LoadRememberedUsername();
     }
 
-   private void OnLoginClicked()
-{
-    string email = emailInput.text.Trim();
-    string password = passwordInput.text;
-
-    if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+    private void OnLoginClicked()
     {
-        ShowMessage("Please enter your email and password.", Color.red);
-        return;
+        string username = usernameInput.text.Trim();
+        string password = passwordInput.text;
+
+        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+        {
+            ShowMessage("Please enter your username and password.", Color.red);
+            return;
+        }
+
+        if (loadingPanel != null)
+            loadingPanel.SetActive(true);
+
+        loginAccountButton.interactable = false;
+
+        AuthenticationManager.Instance.LoginUser(
+            username,
+            password,
+            OnLoginCompleted
+        );
     }
 
-    if (loadingPanel != null)
-        loadingPanel.SetActive(true);
+    private void OnLoginCompleted(bool success, string message)
+    {
+        if (loadingPanel != null)
+            loadingPanel.SetActive(false);
 
-    loginAccountButton.interactable = false;
+        loginAccountButton.interactable = true;
 
-    AuthenticationManager.Instance.LoginUser(email, password, OnLoginCompleted);
-}
+        if (success)
+        {
+            ShowMessage(message, Color.green);
+
+            if (rememberMeToggle != null && rememberMeToggle.isOn)
+            {
+                PlayerPrefs.SetString(
+                    "RememberedUsername",
+                    usernameInput.text.Trim()
+                );
+            }
+            else
+            {
+                PlayerPrefs.DeleteKey("RememberedUsername");
+            }
+
+            Invoke(nameof(OpenHomeScene), 1f);
+        }
+        else
+        {
+            ShowMessage(message, Color.red);
+        }
+    }
 
     private void OnForgotPasswordClicked()
     {
-        Debug.Log("Forgot Password button clicked.");
+        ShowMessage(
+            "Please contact the administrator to reset your password.",
+            Color.yellow
+        );
     }
 
     private void OpenSignUpScene()
     {
         SceneManager.LoadScene("SignUpScene");
+    }
+
+    private void OpenHomeScene()
+    {
+        SceneManager.LoadScene("HomeScene");
     }
 
     private void TogglePasswordVisibility(bool showPassword)
@@ -91,12 +132,15 @@ public class LoginController : MonoBehaviour
         passwordInput.ForceLabelUpdate();
     }
 
-    private void LoadRememberedEmail()
+    private void LoadRememberedUsername()
     {
-        if (PlayerPrefs.HasKey("RememberedEmail"))
+        if (PlayerPrefs.HasKey("RememberedUsername"))
         {
-            emailInput.text = PlayerPrefs.GetString("RememberedEmail");
-            rememberMeToggle.isOn = true;
+            usernameInput.text =
+                PlayerPrefs.GetString("RememberedUsername");
+
+            if (rememberMeToggle != null)
+                rememberMeToggle.isOn = true;
         }
     }
 
@@ -108,36 +152,4 @@ public class LoginController : MonoBehaviour
             messageText.color = color;
         }
     }
-    private void OnLoginCompleted(bool success, string message)
-{
-    if (loadingPanel != null)
-        loadingPanel.SetActive(false);
-
-    loginAccountButton.interactable = true;
-
-    if (success)
-    {
-        ShowMessage(message, Color.green);
-
-        if (rememberMeToggle != null && rememberMeToggle.isOn)
-        {
-            PlayerPrefs.SetString("RememberedEmail", emailInput.text.Trim());
-        }
-        else
-        {
-            PlayerPrefs.DeleteKey("RememberedEmail");
-        }
-
-        Invoke(nameof(OpenHomeScene), 1f);
-    }
-    else
-    {
-        ShowMessage(message, Color.red);
-    }
-}
-
-private void OpenHomeScene()
-{
-    SceneManager.LoadScene("HomeScene");
-}
 }

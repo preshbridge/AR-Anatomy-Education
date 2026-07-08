@@ -9,8 +9,8 @@ public class SignUpController : MonoBehaviour
     public TMP_InputField firstNameInput;
     public TMP_InputField middleNameInput;
     public TMP_InputField surnameInput;
+    public TMP_InputField usernameInput;
     public TMP_InputField ageInput;
-    public TMP_InputField emailInput;
     public TMP_InputField passwordInput;
     public TMP_InputField confirmPasswordInput;
 
@@ -23,24 +23,20 @@ public class SignUpController : MonoBehaviour
 
     [Header("UI")]
     public GameObject signUpPanel;
-    public GameObject loadingPanel;
+    public GameObject successPanel;
     public TMP_Text messageText;
 
     private void Start()
     {
-        // Hide loading panel when scene starts
-        if (loadingPanel != null)
-            loadingPanel.SetActive(false);
+        if (successPanel != null)
+            successPanel.SetActive(false);
 
-        // Show Sign Up panel
         if (signUpPanel != null)
             signUpPanel.SetActive(true);
 
-        // Clear message
         if (messageText != null)
             messageText.text = "";
 
-        // Button listeners
         if (createAccountButton != null)
             createAccountButton.onClick.AddListener(OnCreateAccountClicked);
 
@@ -55,25 +51,22 @@ public class SignUpController : MonoBehaviour
 
     private void RegisterUser()
     {
-        // Read user input
         string firstName = firstNameInput.text.Trim();
         string middleName = middleNameInput.text.Trim();
         string surname = surnameInput.text.Trim();
-        string email = emailInput.text.Trim();
+        string username = usernameInput.text.Trim();
         string password = passwordInput.text;
         string confirmPassword = confirmPasswordInput.text;
 
-        // Validate age
         if (!int.TryParse(ageInput.text.Trim(), out int age))
         {
             ShowMessage("Please enter a valid age.", Color.red);
             return;
         }
 
-        // Check required fields
         if (string.IsNullOrEmpty(firstName) ||
             string.IsNullOrEmpty(surname) ||
-            string.IsNullOrEmpty(email) ||
+            string.IsNullOrEmpty(username) ||
             string.IsNullOrEmpty(password) ||
             string.IsNullOrEmpty(confirmPassword))
         {
@@ -81,80 +74,73 @@ public class SignUpController : MonoBehaviour
             return;
         }
 
-        // Check passwords match
+        if (username.Contains(" "))
+        {
+            ShowMessage("Username cannot contain spaces.", Color.red);
+            return;
+        }
+
         if (password != confirmPassword)
         {
             ShowMessage("Passwords do not match.", Color.red);
             return;
         }
 
-        // Password length
         if (password.Length < 6)
         {
             ShowMessage("Password must be at least 6 characters.", Color.red);
             return;
         }
 
-        // Age check
         if (age < 13)
         {
             ShowMessage("You must be at least 13 years old.", Color.red);
             return;
         }
 
-        // Terms and Conditions
         if (termsToggle == null || !termsToggle.isOn)
         {
-            ShowMessage("Please accept the Terms and Conditions before creating an account.", Color.red);
+            ShowMessage("Please accept the Terms and Conditions.", Color.red);
             return;
         }
 
-        // Hide Sign Up UI
         if (signUpPanel != null)
             signUpPanel.SetActive(false);
 
-        // Show Loading UI
-        if (loadingPanel != null)
-            loadingPanel.SetActive(true);
-
         createAccountButton.interactable = false;
 
-        // Register user with Firebase
         AuthenticationManager.Instance.RegisterUser(
             firstName,
             middleName,
             surname,
+            username,
             age,
-            email,
             password,
             OnRegistrationCompleted
         );
     }
 
     private void OnRegistrationCompleted(bool success, string message)
-{
-    // Hide Loading
-    if (loadingPanel != null)
-        loadingPanel.SetActive(false);
-
-    createAccountButton.interactable = true;
-
-    if (success)
     {
-        ShowMessage(message, Color.green);
+        createAccountButton.interactable = true;
 
-        // Give the user a moment to read the success message
-        Invoke(nameof(OpenLoginScene), 1.2f);
-    }
-    else
-    {
-        // Show Sign Up screen again
-        if (signUpPanel != null)
-            signUpPanel.SetActive(true);
+        if (success)
+        {
+            if (successPanel != null)
+                successPanel.SetActive(true);
 
-        ShowMessage(message, Color.red);
+            ShowMessage(message, Color.green);
+
+            Invoke(nameof(OpenLoginScene), 1.2f);
+        }
+        else
+        {
+            if (signUpPanel != null)
+                signUpPanel.SetActive(true);
+
+            ShowMessage(message, Color.red);
+        }
     }
-}
 
     private void ShowMessage(string message, Color color)
     {

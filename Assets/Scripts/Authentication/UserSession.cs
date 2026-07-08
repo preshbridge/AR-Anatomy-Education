@@ -8,9 +8,8 @@ public class UserSession : MonoBehaviour
     public string FirstName;
     public string MiddleName;
     public string Surname;
-    public string Email;
+    public string Username;
     public int Age;
-    public bool IsEmailVerified;
 
     private void Awake()
     {
@@ -25,15 +24,14 @@ public class UserSession : MonoBehaviour
         }
     }
 
-    public void SetUser(UserData data, bool verified)
+    public void SetUser(UserData data)
     {
         UserId = data.userId;
         FirstName = data.firstName;
         MiddleName = data.middleName;
         Surname = data.surname;
-        Email = data.email;
+        Username = data.username;
         Age = data.age;
-        IsEmailVerified = verified;
     }
 
     public void Clear()
@@ -42,8 +40,7 @@ public class UserSession : MonoBehaviour
         FirstName = "";
         MiddleName = "";
         Surname = "";
-        Email = "";
+        Username = "";
         Age = 0;
-        IsEmailVerified = false;
     }
 }
