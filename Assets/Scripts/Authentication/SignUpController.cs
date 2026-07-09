@@ -28,11 +28,11 @@ public class SignUpController : MonoBehaviour
 
     private void Start()
     {
-        if (successPanel != null)
-            successPanel.SetActive(false);
-
         if (signUpPanel != null)
             signUpPanel.SetActive(true);
+
+        if (successPanel != null)
+            successPanel.SetActive(false);
 
         if (messageText != null)
             messageText.text = "";
@@ -104,9 +104,6 @@ public class SignUpController : MonoBehaviour
             return;
         }
 
-        if (signUpPanel != null)
-            signUpPanel.SetActive(false);
-
         createAccountButton.interactable = false;
 
         AuthenticationManager.Instance.RegisterUser(
@@ -126,15 +123,28 @@ public class SignUpController : MonoBehaviour
 
         if (success)
         {
+            // Hide the form
+            if (signUpPanel != null)
+                signUpPanel.SetActive(false);
+
+            // Show the success panel
             if (successPanel != null)
                 successPanel.SetActive(true);
 
+            // If messageText is outside the panels,
+            // this will display the success message.
             ShowMessage(message, Color.green);
 
-            Invoke(nameof(OpenLoginScene), 1.2f);
+            // Go to Login after 1.5 seconds
+            Invoke(nameof(OpenLoginScene), 1.5f);
         }
         else
         {
+            // Hide success panel if it was visible
+            if (successPanel != null)
+                successPanel.SetActive(false);
+
+            // Show the sign up form again
             if (signUpPanel != null)
                 signUpPanel.SetActive(true);
 
