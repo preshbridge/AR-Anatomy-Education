@@ -196,10 +196,10 @@ public class SignUpController : MonoBehaviour
         }
     }
 
-    private void OpenLoginScene()
-    {
-        Debug.Log("✅ Opening Login Scene");
+   private void OpenLoginScene()
+{
+    Debug.Log("Opening Login Scene...");
 
-        SceneManager.LoadScene("LoginScene");
-    }
+    SceneManager.LoadScene("LoginScene");
+}
 }

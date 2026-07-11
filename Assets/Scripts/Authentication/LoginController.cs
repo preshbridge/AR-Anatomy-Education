@@ -19,37 +19,45 @@ public class LoginController : MonoBehaviour
     public Button signUpButton;
 
     [Header("UI")]
-    public TMP_Text messageText;
-    public GameObject loadingPanel;
+public GameObject loginPanel;
+public GameObject successPanel;
+public TMP_Text messageText;
+public GameObject loadingPanel;
 
     private void Start()
+{
+    if (loginPanel != null)
+        loginPanel.SetActive(true);
+
+    if (successPanel != null)
+        successPanel.SetActive(false);
+
+    if (loadingPanel != null)
+        loadingPanel.SetActive(false);
+
+    if (messageText != null)
+        messageText.text = "";
+
+    if (passwordInput != null)
     {
-        if (loadingPanel != null)
-            loadingPanel.SetActive(false);
-
-        if (messageText != null)
-            messageText.text = "";
-
-        if (passwordInput != null)
-        {
-            passwordInput.contentType = TMP_InputField.ContentType.Password;
-            passwordInput.ForceLabelUpdate();
-        }
-
-        if (loginAccountButton != null)
-            loginAccountButton.onClick.AddListener(OnLoginClicked);
-
-        if (forgotPasswordButton != null)
-            forgotPasswordButton.onClick.AddListener(OnForgotPasswordClicked);
-
-        if (signUpButton != null)
-            signUpButton.onClick.AddListener(OpenSignUpScene);
-
-        if (showPasswordToggle != null)
-            showPasswordToggle.onValueChanged.AddListener(TogglePasswordVisibility);
-
-        LoadRememberedUsername();
+        passwordInput.contentType = TMP_InputField.ContentType.Password;
+        passwordInput.ForceLabelUpdate();
     }
+
+    if (loginAccountButton != null)
+        loginAccountButton.onClick.AddListener(OnLoginClicked);
+
+    if (forgotPasswordButton != null)
+        forgotPasswordButton.onClick.AddListener(OnForgotPasswordClicked);
+
+    if (signUpButton != null)
+        signUpButton.onClick.AddListener(OpenSignUpScene);
+
+    if (showPasswordToggle != null)
+        showPasswordToggle.onValueChanged.AddListener(TogglePasswordVisibility);
+
+    LoadRememberedUsername();
+}
 
     private void OnLoginClicked()
     {
@@ -75,36 +83,49 @@ public class LoginController : MonoBehaviour
     }
 
     private void OnLoginCompleted(bool success, string message)
+{
+    Debug.Log("OnLoginCompleted called");
+    Debug.Log("Success = " + success);
+
+    if (loadingPanel != null)
+        loadingPanel.SetActive(false);
+
+    loginAccountButton.interactable = true;
+
+    if (success)
     {
-        if (loadingPanel != null)
-            loadingPanel.SetActive(false);
+        Debug.Log("Login Successful!");
 
-        loginAccountButton.interactable = true;
+        if (loginPanel != null)
+            loginPanel.SetActive(false);
 
-        if (success)
+        if (successPanel != null)
+            successPanel.SetActive(true);
+
+        ShowMessage(message, Color.green);
+
+        if (rememberMeToggle != null && rememberMeToggle.isOn)
         {
-            ShowMessage(message, Color.green);
-
-            if (rememberMeToggle != null && rememberMeToggle.isOn)
-            {
-                PlayerPrefs.SetString(
-                    "RememberedUsername",
-                    usernameInput.text.Trim()
-                );
-            }
-            else
-            {
-                PlayerPrefs.DeleteKey("RememberedUsername");
-            }
-
-            Invoke(nameof(OpenHomeScene), 1f);
+            PlayerPrefs.SetString("RememberedUsername", usernameInput.text.Trim());
         }
         else
         {
-            ShowMessage(message, Color.red);
+            PlayerPrefs.DeleteKey("RememberedUsername");
         }
-    }
 
+        Invoke(nameof(OpenHomeScene), 1.5f);
+    }
+    else
+    {
+        if (successPanel != null)
+            successPanel.SetActive(false);
+
+        if (loginPanel != null)
+            loginPanel.SetActive(true);
+
+        ShowMessage(message, Color.red);
+    }
+}
     private void OnForgotPasswordClicked()
     {
         ShowMessage(
@@ -118,11 +139,12 @@ public class LoginController : MonoBehaviour
         SceneManager.LoadScene("SignUpScene");
     }
 
-    private void OpenHomeScene()
-    {
-        SceneManager.LoadScene("HomeScene");
-    }
+   private void OpenHomeScene()
+{
+    Debug.Log("Opening HomeScene...");
 
+    SceneManager.LoadScene("HomeScene");
+}
     private void TogglePasswordVisibility(bool showPassword)
     {
         passwordInput.contentType = showPassword
