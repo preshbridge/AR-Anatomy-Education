@@ -9,57 +9,54 @@ public class LoginController : MonoBehaviour
     public TMP_InputField usernameInput;
     public TMP_InputField passwordInput;
 
+    [Header("Panels")]
+    public GameObject loginPanel;
+    public GameObject successPanel;
+
+    [Header("Buttons")]
+    public Button loginButton;
+    public Button signUpButton;
+    public Button forgotPasswordButton;
+
     [Header("Toggles")]
     public Toggle rememberMeToggle;
     public Toggle showPasswordToggle;
 
-    [Header("Buttons")]
-    public Button loginAccountButton;
-    public Button forgotPasswordButton;
-    public Button signUpButton;
-
-    [Header("UI")]
-public GameObject loginPanel;
-public GameObject successPanel;
-public TMP_Text messageText;
-public GameObject loadingPanel;
+    [Header("Text")]
+    public TMP_Text messageText;
 
     private void Start()
-{
-    if (loginPanel != null)
+    {
         loginPanel.SetActive(true);
-
-    if (successPanel != null)
         successPanel.SetActive(false);
 
-    if (loadingPanel != null)
-        loadingPanel.SetActive(false);
-
-    if (messageText != null)
         messageText.text = "";
 
-    if (passwordInput != null)
-    {
         passwordInput.contentType = TMP_InputField.ContentType.Password;
+        passwordInput.ForceLabelUpdate();
+
+        loginButton.onClick.AddListener(LoginUser);
+
+        signUpButton.onClick.AddListener(OpenSignUpScene);
+
+        forgotPasswordButton.onClick.AddListener(ForgotPassword);
+
+        if (showPasswordToggle != null)
+            showPasswordToggle.onValueChanged.AddListener(TogglePassword);
+
+        LoadRememberedUsername();
+    }
+
+    private void TogglePassword(bool show)
+    {
+        passwordInput.contentType = show ?
+            TMP_InputField.ContentType.Standard :
+            TMP_InputField.ContentType.Password;
+
         passwordInput.ForceLabelUpdate();
     }
 
-    if (loginAccountButton != null)
-        loginAccountButton.onClick.AddListener(OnLoginClicked);
-
-    if (forgotPasswordButton != null)
-        forgotPasswordButton.onClick.AddListener(OnForgotPasswordClicked);
-
-    if (signUpButton != null)
-        signUpButton.onClick.AddListener(OpenSignUpScene);
-
-    if (showPasswordToggle != null)
-        showPasswordToggle.onValueChanged.AddListener(TogglePasswordVisibility);
-
-    LoadRememberedUsername();
-}
-
-    private void OnLoginClicked()
+    private void LoginUser()
     {
         string username = usernameInput.text.Trim();
         string password = passwordInput.text;
@@ -70,10 +67,9 @@ public GameObject loadingPanel;
             return;
         }
 
-        if (loadingPanel != null)
-            loadingPanel.SetActive(true);
+        loginButton.interactable = false;
 
-        loginAccountButton.interactable = false;
+        ShowMessage("Logging in...", Color.white);
 
         AuthenticationManager.Instance.LoginUser(
             username,
@@ -83,55 +79,49 @@ public GameObject loadingPanel;
     }
 
     private void OnLoginCompleted(bool success, string message)
-{
-    Debug.Log("OnLoginCompleted called");
-    Debug.Log("Success = " + success);
-
-    if (loadingPanel != null)
-        loadingPanel.SetActive(false);
-
-    loginAccountButton.interactable = true;
-
-    if (success)
     {
-        Debug.Log("Login Successful!");
+        loginButton.interactable = true;
 
-        if (loginPanel != null)
+        if (success)
+        {
+            if (rememberMeToggle != null && rememberMeToggle.isOn)
+            {
+                PlayerPrefs.SetString("RememberedUsername", usernameInput.text.Trim());
+            }
+            else
+            {
+                PlayerPrefs.DeleteKey("RememberedUsername");
+            }
+
             loginPanel.SetActive(false);
-
-        if (successPanel != null)
             successPanel.SetActive(true);
 
-        ShowMessage(message, Color.green);
+            string welcomeName = "User";
 
-        if (rememberMeToggle != null && rememberMeToggle.isOn)
-        {
-            PlayerPrefs.SetString("RememberedUsername", usernameInput.text.Trim());
+            if (UserSession.Instance != null)
+                welcomeName = UserSession.Instance.FirstName;
+
+            ShowMessage("Login Successful!\n\nWelcome " + welcomeName + "!", Color.green);
+
+            Invoke(nameof(OpenHomeScene), 2f);
         }
         else
         {
-            PlayerPrefs.DeleteKey("RememberedUsername");
-        }
-
-        Invoke(nameof(OpenHomeScene), 1.5f);
-    }
-    else
-    {
-        if (successPanel != null)
+            loginPanel.SetActive(true);
             successPanel.SetActive(false);
 
-        if (loginPanel != null)
-            loginPanel.SetActive(true);
-
-        ShowMessage(message, Color.red);
+            ShowMessage(message, Color.red);
+        }
     }
-}
-    private void OnForgotPasswordClicked()
+
+    private void ForgotPassword()
     {
-        ShowMessage(
-            "Please contact the administrator to reset your password.",
-            Color.yellow
-        );
+        ShowMessage("Please contact the administrator to reset your password.", Color.yellow);
+    }
+
+    private void OpenHomeScene()
+    {
+        SceneManager.LoadScene("HomeScene");
     }
 
     private void OpenSignUpScene()
@@ -139,27 +129,11 @@ public GameObject loadingPanel;
         SceneManager.LoadScene("SignUpScene");
     }
 
-   private void OpenHomeScene()
-{
-    Debug.Log("Opening HomeScene...");
-
-    SceneManager.LoadScene("HomeScene");
-}
-    private void TogglePasswordVisibility(bool showPassword)
-    {
-        passwordInput.contentType = showPassword
-            ? TMP_InputField.ContentType.Standard
-            : TMP_InputField.ContentType.Password;
-
-        passwordInput.ForceLabelUpdate();
-    }
-
     private void LoadRememberedUsername()
     {
         if (PlayerPrefs.HasKey("RememberedUsername"))
         {
-            usernameInput.text =
-                PlayerPrefs.GetString("RememberedUsername");
+            usernameInput.text = PlayerPrefs.GetString("RememberedUsername");
 
             if (rememberMeToggle != null)
                 rememberMeToggle.isOn = true;

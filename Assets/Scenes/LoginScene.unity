@@ -848,15 +848,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   usernameInput: {fileID: 1428599060}
   passwordInput: {fileID: 1138866743}
-  rememberMeToggle: {fileID: 1325888706}
-  showPasswordToggle: {fileID: 132390587}
-  loginAccountButton: {fileID: 1026696612}
-  forgotPasswordButton: {fileID: 1327392985}
-  signUpButton: {fileID: 621241745}
   loginPanel: {fileID: 568488094}
   successPanel: {fileID: 1943707673}
+  loginButton: {fileID: 1026696612}
+  signUpButton: {fileID: 621241745}
+  forgotPasswordButton: {fileID: 1327392985}
+  rememberMeToggle: {fileID: 1325888706}
+  showPasswordToggle: {fileID: 132390587}
   messageText: {fileID: 1151882824}
-  loadingPanel: {fileID: 1943707673}
 --- !u!4 &487877460
 Transform:
   m_ObjectHideFlags: 0

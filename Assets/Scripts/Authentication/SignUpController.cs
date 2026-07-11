@@ -14,49 +14,60 @@ public class SignUpController : MonoBehaviour
     public TMP_InputField passwordInput;
     public TMP_InputField confirmPasswordInput;
 
-    [Header("Terms & Conditions")]
+    [Header("Password")]
+    public Toggle showPasswordToggle;
+
+    [Header("Terms")]
     public Toggle termsToggle;
 
     [Header("Buttons")]
     public Button createAccountButton;
     public Button loginButton;
 
-    [Header("UI")]
+    [Header("Panels")]
     public GameObject signUpPanel;
     public GameObject successPanel;
+
+    [Header("Text")]
     public TMP_Text messageText;
 
     private void Start()
     {
-        Debug.Log("✅ SignUpController Started");
+        signUpPanel.SetActive(true);
+        successPanel.SetActive(false);
 
-        if (signUpPanel != null)
-            signUpPanel.SetActive(true);
+        messageText.text = "";
 
-        if (successPanel != null)
-            successPanel.SetActive(false);
+        passwordInput.contentType = TMP_InputField.ContentType.Password;
+        confirmPasswordInput.contentType = TMP_InputField.ContentType.Password;
 
-        if (messageText != null)
-            messageText.text = "";
+        passwordInput.ForceLabelUpdate();
+        confirmPasswordInput.ForceLabelUpdate();
 
-        if (createAccountButton != null)
-            createAccountButton.onClick.AddListener(OnCreateAccountClicked);
+        createAccountButton.onClick.AddListener(RegisterUser);
 
-        if (loginButton != null)
-            loginButton.onClick.AddListener(OpenLoginScene);
+        loginButton.onClick.AddListener(OpenLoginScene);
+
+        if(showPasswordToggle != null)
+            showPasswordToggle.onValueChanged.AddListener(TogglePassword);
     }
 
-    private void OnCreateAccountClicked()
+    private void TogglePassword(bool show)
     {
-        Debug.Log("✅ Create Account Button Clicked");
+        passwordInput.contentType = show ?
+            TMP_InputField.ContentType.Standard :
+            TMP_InputField.ContentType.Password;
 
-        RegisterUser();
+        confirmPasswordInput.contentType = show ?
+            TMP_InputField.ContentType.Standard :
+            TMP_InputField.ContentType.Password;
+
+        passwordInput.ForceLabelUpdate();
+        confirmPasswordInput.ForceLabelUpdate();
     }
 
     private void RegisterUser()
     {
-        Debug.Log("✅ RegisterUser() Started");
-
         string firstName = firstNameInput.text.Trim();
         string middleName = middleNameInput.text.Trim();
         string surname = surnameInput.text.Trim();
@@ -64,79 +75,45 @@ public class SignUpController : MonoBehaviour
         string password = passwordInput.text;
         string confirmPassword = confirmPasswordInput.text;
 
-        if (!int.TryParse(ageInput.text.Trim(), out int age))
+        if(!int.TryParse(ageInput.text,out int age))
         {
-            Debug.Log("❌ Invalid age.");
-
-            ShowMessage("Please enter a valid age.", Color.red);
+            ShowMessage("Please enter a valid age.",Color.red);
             return;
         }
 
-        if (string.IsNullOrEmpty(firstName) ||
-            string.IsNullOrEmpty(surname) ||
-            string.IsNullOrEmpty(username) ||
-            string.IsNullOrEmpty(password) ||
-            string.IsNullOrEmpty(confirmPassword))
+        if(firstName=="" || surname=="" || username=="" || password=="")
         {
-            Debug.Log("❌ Required fields missing.");
-
-            ShowMessage("Please fill in all required fields.", Color.red);
+            ShowMessage("Please fill all required fields.",Color.red);
             return;
         }
 
-        if (username.Contains(" "))
+        if(password!=confirmPassword)
         {
-            Debug.Log("❌ Username contains spaces.");
-
-            ShowMessage("Username cannot contain spaces.", Color.red);
+            ShowMessage("Passwords do not match.",Color.red);
             return;
         }
 
-        if (password != confirmPassword)
+        if(password.Length<6)
         {
-            Debug.Log("❌ Passwords do not match.");
-
-            ShowMessage("Passwords do not match.", Color.red);
+            ShowMessage("Password must be at least 6 characters.",Color.red);
             return;
         }
 
-        if (password.Length < 6)
+        if(age<13)
         {
-            Debug.Log("❌ Password too short.");
-
-            ShowMessage("Password must be at least 6 characters.", Color.red);
+            ShowMessage("You must be at least 13 years old.",Color.red);
             return;
         }
 
-        if (age < 13)
+        if(!termsToggle.isOn)
         {
-            Debug.Log("❌ User is under 13.");
-
-            ShowMessage("You must be at least 13 years old.", Color.red);
+            ShowMessage("Please accept the Terms & Conditions.",Color.red);
             return;
         }
-
-        if (termsToggle == null || !termsToggle.isOn)
-        {
-            Debug.Log("❌ Terms and Conditions not accepted.");
-
-            ShowMessage("Please accept the Terms and Conditions.", Color.red);
-            return;
-        }
-
-        Debug.Log("✅ All validation passed.");
 
         createAccountButton.interactable = false;
 
-        if (signUpPanel != null)
-            signUpPanel.SetActive(false);
-
-        if (successPanel != null)
-            successPanel.SetActive(true);
-
-        ShowMessage("Creating account...", Color.white);
-
-        Debug.Log("✅ Calling AuthenticationManager.RegisterUser()");
+        ShowMessage("Creating account...",Color.white);
 
         AuthenticationManager.Instance.RegisterUser(
             firstName,
@@ -149,57 +126,36 @@ public class SignUpController : MonoBehaviour
         );
     }
 
-    private void OnRegistrationCompleted(bool success, string message)
+    private void OnRegistrationCompleted(bool success,string message)
     {
-        Debug.Log("✅ OnRegistrationCompleted() Called");
-        Debug.Log("Success = " + success);
-        Debug.Log("Message = " + message);
-
         createAccountButton.interactable = true;
 
-        if (success)
+        if(success)
         {
-            Debug.Log("✅ Registration Successful");
+            signUpPanel.SetActive(false);
+            successPanel.SetActive(true);
 
-            if (signUpPanel != null)
-                signUpPanel.SetActive(false);
+            ShowMessage("Account created successfully!\n\nPlease login using your Username and Password.",Color.green);
 
-            if (successPanel != null)
-                successPanel.SetActive(true);
-
-            ShowMessage(message, Color.green);
-
-            Invoke(nameof(OpenLoginScene), 1.5f);
+            Invoke(nameof(OpenLoginScene),2f);
         }
         else
         {
-            Debug.Log("❌ Registration Failed");
+            signUpPanel.SetActive(true);
+            successPanel.SetActive(false);
 
-            if (successPanel != null)
-                successPanel.SetActive(false);
-
-            if (signUpPanel != null)
-                signUpPanel.SetActive(true);
-
-            ShowMessage(message, Color.red);
+            ShowMessage(message,Color.red);
         }
     }
 
-    private void ShowMessage(string message, Color color)
+    private void ShowMessage(string msg,Color color)
     {
-        Debug.Log("MESSAGE: " + message);
-
-        if (messageText != null)
-        {
-            messageText.text = message;
-            messageText.color = color;
-        }
+        messageText.text=msg;
+        messageText.color=color;
     }
 
-   private void OpenLoginScene()
-{
-    Debug.Log("Opening Login Scene...");
-
-    SceneManager.LoadScene("LoginScene");
-}
+    private void OpenLoginScene()
+    {
+        SceneManager.LoadScene("LoginScene");
+    }
 }
