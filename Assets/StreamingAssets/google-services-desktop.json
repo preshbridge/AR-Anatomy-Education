@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "500788967954",
+    "firebase_url": "https://ar-anatomy-education-default-rtdb.firebaseio.com",
     "project_id": "ar-anatomy-education",
     "storage_bucket": "ar-anatomy-education.firebasestorage.app"
   },

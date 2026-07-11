@@ -42,13 +42,23 @@ public class AuthenticationManager : MonoBehaviour
         }
     }
 
-    private void InitializeDatabase()
-    {
-        Database = FirebaseDatabase.DefaultInstance.RootReference;
+ private void InitializeDatabase()
+{
+    Debug.Log("Initializing Database...");
 
+    Database = FirebaseDatabase.DefaultInstance.RootReference;
+
+    Debug.Log("Database object = " + Database);
+
+    if (Database == null)
+    {
+        Debug.LogError("DATABASE IS NULL");
+    }
+    else
+    {
         Debug.Log("Authentication Manager Ready");
     }
-
+}
     //=========================
     // PASSWORD HASHING
     //=========================

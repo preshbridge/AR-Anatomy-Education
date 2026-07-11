@@ -977,6 +977,7 @@ RectTransform:
   - {fileID: 1327392982}
   - {fileID: 1325888705}
   - {fileID: 132390586}
+  - {fileID: 621241744}
   m_Father: {fileID: 1922539328}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1054,11 +1055,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1566138697}
-  m_Father: {fileID: 1922539328}
+  m_Father: {fileID: 568488095}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 281.5761, y: -779}
+  m_AnchoredPosition: {x: 280.5761, y: -779}
   m_SizeDelta: {x: 228.0292, y: 111.5065}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &621241745
@@ -1269,7 +1270,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -102.79589, y: 195}
+  m_AnchoredPosition: {x: -102.79589, y: 606}
   m_SizeDelta: {x: 762.8408, y: 255.4545}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &708821883
@@ -1292,10 +1293,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Login Successful!
-
-
-    Welcome back!'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3099,7 +3097,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 568488095}
-  - {fileID: 621241744}
   - {fileID: 1943707674}
   - {fileID: 1151882822}
   m_Father: {fileID: 0}
