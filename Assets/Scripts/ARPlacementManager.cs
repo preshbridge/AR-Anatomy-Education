@@ -35,8 +35,16 @@ private ARRaycastManager raycastManager;
         {
             Pose pose = hits[0].pose;
 
-            Instantiate(humanBodyPrefab, pose.position, pose.rotation);
+            GameObject body = Instantiate(humanBodyPrefab, pose.position, Quaternion.identity);
 
+// Make it face the camera
+body.transform.LookAt(Camera.main.transform);
+
+// Turn it around
+body.transform.Rotate(0,180,0);
+
+// Scale it
+body.transform.localScale = Vector3.one * 0.01f;
             spawned = true;
         }
     }
