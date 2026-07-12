@@ -471,7 +471,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 95344501}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1641089672}
+        m_TargetAssemblyTypeName: HomeSceneManager, Assembly-CSharp
+        m_MethodName: OpenAR
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &95344501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2160,7 +2172,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.039896354}
-  m_AnchoredPosition: {x: -43.045197, y: 23.08258}
+  m_AnchoredPosition: {x: -43.045166, y: 23.08252}
   m_SizeDelta: {x: 86.0902, y: 46.165}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &820511223
@@ -5717,10 +5729,18 @@ MonoBehaviour:
   shoulderLessonPanel: {fileID: 149259924}
   upperArmLessonPanel: {fileID: 325480432}
   forearmLessonPanel: {fileID: 1687131358}
-  muscleTitle: {fileID: 1791238487}
-  descriptionText: {fileID: 280117710}
-  functionText: {fileID: 1975383023}
-  locationText: {fileID: 875845995}
+  shoulderMuscleTitle: {fileID: 1791238487}
+  shoulderDescriptionText: {fileID: 280117710}
+  shoulderFunctionText: {fileID: 1975383023}
+  shoulderLocationText: {fileID: 875845995}
+  upperArmMuscleTitle: {fileID: 721458006}
+  upperArmDescriptionText: {fileID: 598839414}
+  upperArmFunctionText: {fileID: 996599842}
+  upperArmLocationText: {fileID: 1157255070}
+  forearmMuscleTitle: {fileID: 1845506602}
+  forearmDescriptionText: {fileID: 2045537611}
+  forearmFunctionText: {fileID: 1607860337}
+  forearmLocationText: {fileID: 2092207787}
 --- !u!4 &2004735078
 Transform:
   m_ObjectHideFlags: 0
