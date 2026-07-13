@@ -6,8 +6,7 @@ using UnityEngine.XR.ARSubsystems;
 public class ARPlacementManager : MonoBehaviour
 {
     [Header("Human Body Prefab")]
-    public GameObject humanBodyPrefab;
-
+    public MuscleSpawner muscleSpawner;
     [SerializeField]
     private ARRaycastManager raycastManager;
 
@@ -36,11 +35,15 @@ public class ARPlacementManager : MonoBehaviour
             Vector3 spawnPosition = pose.position + new Vector3(0f, 0.15f, 0f);
 
             // Spawn the model
-            GameObject body = Instantiate(
-                humanBodyPrefab,
-                spawnPosition,
-                Quaternion.identity
-            );
+            GameObject selectedMuscle = muscleSpawner.GetSelectedMusclePrefab();
+
+if (selectedMuscle == null)
+{
+    Debug.Log("No muscle prefab found!");
+    return;
+}
+
+GameObject body = Instantiate(selectedMuscle, pose.position, Quaternion.identity);
 
             // Make the body face the user
             Vector3 cameraPosition = Camera.main.transform.position;

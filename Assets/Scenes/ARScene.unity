@@ -817,6 +817,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2016934313}
   - component: {fileID: 2016934312}
+  - component: {fileID: 2016934314}
   m_Layer: 0
   m_Name: MuscleSpawner
   m_TagString: Untagged
@@ -836,7 +837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 422d165f5133a2e4aba2500191473be8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  humanBodyPrefab: {fileID: 5465748565566311070, guid: 68ba56f7d1ab409498ba545dfaa33678, type: 3}
+  muscleSpawner: {fileID: 2016934314}
   raycastManager: {fileID: 210409569}
 --- !u!4 &2016934313
 Transform:
@@ -853,6 +854,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2016934314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016934311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dea374e1ed86a14ead227556f25e231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deltoidPrefab: {fileID: 3825984152687640499, guid: 69c6bb1a3233aa8459893e40319f4f2c, type: 3}
+  supraspinatusPrefab: {fileID: 4873188927784657873, guid: 27940b187749f7e42b19c8bbd928da7b, type: 3}
+  infraspinatusPrefab: {fileID: 8166197591838325590, guid: 476efc6a00b80e148a6d493d51f59163, type: 3}
+  teresMinorPrefab: {fileID: 3214502234496528940, guid: db185d0c6d8aeaf43989ec1745d556c7, type: 3}
+  subscapularisPrefab: {fileID: 1456300829833066678, guid: 9e4c9ca62067a6747ad22afa6ae30643, type: 3}
+  bicepsBrachiiPrefab: {fileID: 690645763343050991, guid: 8cd3999b2c8ec3346982a430c61fd67e, type: 3}
+  brachialisPrefab: {fileID: 1483126331523956474, guid: 45c1b5469d3f55545b44f4e62dcc01c4, type: 3}
+  coracobrachialisPrefab: {fileID: 7970421097977905752, guid: a3d6fc46fa9f91a4d87b8e045914fd53, type: 3}
+  tricepsBrachiiPrefab: {fileID: 3617001570200454546, guid: 0d74e6f4923f1114080441b5b85671e1, type: 3}
+  brachioradialisPrefab: {fileID: 5319581849936629230, guid: 355119914e431c04a8116a1f7e0eb17c, type: 3}
+  flexorCarpiRadialisPrefab: {fileID: 9177685171420563746, guid: b8e4147cf31260245a6b83adeed6976e, type: 3}
+  palmarisLongusPrefab: {fileID: 0}
+  flexorCarpiUlnarisPrefab: {fileID: 350013733969045458, guid: 0270dabfe6d60de49afb8dc314592609, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
