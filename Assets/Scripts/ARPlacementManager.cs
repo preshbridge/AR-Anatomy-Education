@@ -5,18 +5,15 @@ using UnityEngine.XR.ARSubsystems;
 
 public class ARPlacementManager : MonoBehaviour
 {
+    [Header("Human Body Prefab")]
     public GameObject humanBodyPrefab;
 
-   [SerializeField]
-private ARRaycastManager raycastManager;
+    [SerializeField]
+    private ARRaycastManager raycastManager;
+
     private bool spawned = false;
 
     static List<ARRaycastHit> hits = new List<ARRaycastHit>();
-
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
@@ -31,20 +28,31 @@ private ARRaycastManager raycastManager;
         if (touch.phase != TouchPhase.Began)
             return;
 
-        if (raycastManager.Raycast(touch.position, hits, TrackableType.Planes))
+        if (raycastManager.Raycast(touch.position, hits, TrackableType.PlaneWithinPolygon))
         {
             Pose pose = hits[0].pose;
 
-            GameObject body = Instantiate(humanBodyPrefab, pose.position, Quaternion.identity);
+            // Raise the body slightly above the plane
+            Vector3 spawnPosition = pose.position + new Vector3(0f, 0.15f, 0f);
 
-// Make it face the camera
-body.transform.LookAt(Camera.main.transform);
+            // Spawn the model
+            GameObject body = Instantiate(
+                humanBodyPrefab,
+                spawnPosition,
+                Quaternion.identity
+            );
 
-// Turn it around
-body.transform.Rotate(0,180,0);
+            // Make the body face the user
+            Vector3 cameraPosition = Camera.main.transform.position;
 
-// Scale it
-body.transform.localScale = Vector3.one * 0.01f;
+            Vector3 lookDirection = cameraPosition - body.transform.position;
+            lookDirection.y = 0;
+
+            body.transform.rotation = Quaternion.LookRotation(-lookDirection);
+
+            // Adjust size
+            body.transform.localScale = Vector3.one * 0.005f;
+
             spawned = true;
         }
     }
