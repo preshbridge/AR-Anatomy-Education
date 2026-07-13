@@ -836,7 +836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 422d165f5133a2e4aba2500191473be8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  humanBodyPrefab: {fileID: 2524768155448345674, guid: 37056891815ca654abc618417c3c6493, type: 3}
+  humanBodyPrefab: {fileID: 5465748565566311070, guid: 68ba56f7d1ab409498ba545dfaa33678, type: 3}
   raycastManager: {fileID: 210409569}
 --- !u!4 &2016934313
 Transform:
