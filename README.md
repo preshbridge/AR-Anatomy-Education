@@ -137,12 +137,18 @@ git clone  https://github.com/preshbridge/AR-Anatomy-Education/tree/main
 * Onboarding Screen <img width="540" height="1218" alt="image" src="https://github.com/user-attachments/assets/84c311a9-a9f0-4507-a6eb-e8f62452cd0d" />
 
 * * Signup Screen 
-  * * Login Screen <img width="540" height="1218" alt="image" src="https://github.com/user-attachments/assets/f2916a9e-8866-4e35-a6bb-db3019ca3cab" />
+ * Login Screen <img width="540" height="1218" alt="image" src="https://github.com/user-attachments/assets/a2964717-f124-4a13-9aa7-34431f1fbc8d" />
 
-* Home Screen
-* Study Screen
-* Topic Screen
-* Lesson Screen
+* Welcome message  <img width="540" height="1218" alt="image" src="https://github.com/user-attachments/assets/ada078d7-db41-49ca-842a-4c9028cb4f37" />
+
+* Home Screen <img width="540" height="1218" alt="image" src="https://github.com/user-attachments/assets/7aa60906-e507-4cb4-8332-946d1498fd34" />
+
+* Study Screen <img width="540" height="1218" alt="image" src="https://github.com/user-attachments/assets/94ab3ca4-fc21-4774-a206-e4c0b0435a32" />
+
+* Topic Screen <img width="540" height="1218" alt="image" src="https://github.com/user-attachments/assets/782926da-f1b0-403e-a21b-9984d26554fd" />
+
+* Lesson Screen <img width="540" height="1218" alt="image" src="https://github.com/user-attachments/assets/feb80179-6f29-4b93-b839-474c598b4d56" />
+
 * AR View
 
 ---
