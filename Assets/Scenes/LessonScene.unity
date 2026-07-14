@@ -339,9 +339,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1641089672}
-        m_TargetAssemblyTypeName: HomeSceneManager, Assembly-CSharp
-        m_MethodName: OpenAR
+      - m_Target: {fileID: 2004735077}
+        m_TargetAssemblyTypeName: LessonManager, Assembly-CSharp
+        m_MethodName: OpenARScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

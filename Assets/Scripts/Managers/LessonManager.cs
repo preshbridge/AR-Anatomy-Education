@@ -207,4 +207,8 @@ public TMP_Text forearmLocationText;
     {
         SceneManager.LoadScene("TopicScene");
     }
+    public void OpenARScene()
+{
+    SceneManager.LoadScene("ARScene");
+}
 }

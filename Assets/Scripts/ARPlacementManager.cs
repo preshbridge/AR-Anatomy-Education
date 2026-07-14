@@ -35,7 +35,9 @@ public class ARPlacementManager : MonoBehaviour
             Vector3 spawnPosition = pose.position + new Vector3(0f, 0.15f, 0f);
 
             // Spawn the model
+            Debug.Log("Selected Muscle: " + AppManager.Instance.SelectedMuscle);
             GameObject selectedMuscle = muscleSpawner.GetSelectedMusclePrefab();
+            Debug.Log(selectedMuscle);
 
 if (selectedMuscle == null)
 {
@@ -43,7 +45,7 @@ if (selectedMuscle == null)
     return;
 }
 
-GameObject body = Instantiate(selectedMuscle, pose.position, Quaternion.identity);
+GameObject body = Instantiate(selectedMuscle, spawnPosition, Quaternion.identity);
 
             // Make the body face the user
             Vector3 cameraPosition = Camera.main.transform.position;
