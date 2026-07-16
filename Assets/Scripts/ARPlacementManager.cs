@@ -34,7 +34,7 @@ Debug.Log("Plane detected!");
             Pose pose = hits[0].pose;
 
             // Raise the body slightly above the plane
-            Vector3 spawnPosition = pose.position + new Vector3(0f, 0.15f, 0f);
+            Vector3 spawnPosition = pose.position + new Vector3(0f, 0.5f, 0f);
 
             // Spawn the model
             Debug.Log("Selected Muscle: " + AppManager.Instance.SelectedMuscle);
@@ -63,8 +63,7 @@ GameObject body = Instantiate(selectedMuscle, spawnPosition, Quaternion.identity
             body.transform.rotation = Quaternion.LookRotation(-lookDirection);
 
             // Adjust size
-            body.transform.localScale = Vector3.one * 0.05f;
-
+            body.transform.localScale = Vector3.one * 0.15f;
             spawned = true;
         }
     }
