@@ -957,9 +957,8 @@ MonoBehaviour:
   FirstName: 
   MiddleName: 
   Surname: 
-  Email: 
+  Username: 
   Age: 0
-  IsEmailVerified: 0
 --- !u!4 &1610693278
 Transform:
   m_ObjectHideFlags: 0

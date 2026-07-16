@@ -53,6 +53,7 @@ if (selectedMuscle == null)
 }
 
 GameObject body = Instantiate(selectedMuscle, spawnPosition, Quaternion.identity);
+body.AddComponent<ARObjectInteraction>();
 
             // Make the body face the user
             Vector3 cameraPosition = Camera.main.transform.position;
