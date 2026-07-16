@@ -10,8 +10,9 @@ public class ARPlacementManager : MonoBehaviour
     [SerializeField]
     private ARRaycastManager raycastManager;
 
-    private bool spawned = false;
+   public bool spawned = false;
 
+private GameObject currentMuscle;
     static List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
     void Update()
@@ -52,20 +53,31 @@ if (selectedMuscle == null)
     return;
 }
 
-GameObject body = Instantiate(selectedMuscle, spawnPosition, Quaternion.identity);
-body.AddComponent<ARObjectInteraction>();
+currentMuscle = Instantiate(selectedMuscle, spawnPosition, Quaternion.identity);
+currentMuscle.AddComponent<ARObjectInteraction>();
 
             // Make the body face the user
             Vector3 cameraPosition = Camera.main.transform.position;
 
-            Vector3 lookDirection = cameraPosition - body.transform.position;
+            Vector3 lookDirection = cameraPosition - currentMuscle.transform.position;
             lookDirection.y = 0;
 
-            body.transform.rotation = Quaternion.LookRotation(-lookDirection);
+            currentMuscle.transform.rotation = Quaternion.LookRotation(-lookDirection);
 
             // Adjust size
-            body.transform.localScale = Vector3.one * 0.15f;
+            currentMuscle.transform.localScale = Vector3.one * 0.15f;
             spawned = true;
         }
     }
+
+    public void ResetPlacement()
+{
+    if (currentMuscle != null)
+    {
+        Destroy(currentMuscle);
+    }
+
+    currentMuscle = null;
+    spawned = false;
+}
 }
