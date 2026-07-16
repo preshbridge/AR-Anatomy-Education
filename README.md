@@ -150,7 +150,8 @@ git clone  https://github.com/preshbridge/AR-Anatomy-Education/tree/main
 
 * Lesson Screen <img width="540" height="1218" alt="image" src="https://github.com/user-attachments/assets/feb80179-6f29-4b93-b839-474c598b4d56" />
 
-* AR View
+* AR View ![Uploading WhatsApp Image 2026-07-16 at 17.22.46.jpeg…]()
+
 
 ---
 
