@@ -26,7 +26,9 @@ public class ARPlacementManager : MonoBehaviour
 
         if (touch.phase != TouchPhase.Began)
             return;
+            Debug.Log("Screen tapped");
 
+Debug.Log("Plane detected!");
         if (raycastManager.Raycast(touch.position, hits, TrackableType.PlaneWithinPolygon))
         {
             Pose pose = hits[0].pose;
@@ -37,7 +39,12 @@ public class ARPlacementManager : MonoBehaviour
             // Spawn the model
             Debug.Log("Selected Muscle: " + AppManager.Instance.SelectedMuscle);
             GameObject selectedMuscle = muscleSpawner.GetSelectedMusclePrefab();
-            Debug.Log(selectedMuscle);
+           Debug.Log("Selected Muscle: " + AppManager.Instance.SelectedMuscle);
+
+if(selectedMuscle != null)
+    Debug.Log("Prefab Found: " + selectedMuscle.name);
+else
+    Debug.Log("Prefab is NULL");
 
 if (selectedMuscle == null)
 {
@@ -56,7 +63,7 @@ GameObject body = Instantiate(selectedMuscle, spawnPosition, Quaternion.identity
             body.transform.rotation = Quaternion.LookRotation(-lookDirection);
 
             // Adjust size
-            body.transform.localScale = Vector3.one * 0.005f;
+            body.transform.localScale = Vector3.one * 0.05f;
 
             spawned = true;
         }
