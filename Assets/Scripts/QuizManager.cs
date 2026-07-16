@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -20,70 +21,13 @@ public class QuizManager : MonoBehaviour
         LoadQuestions();
         ShowQuestion();
     }
-
-    void LoadQuestions()
-    {
-        string muscle = AppManager.Instance.SelectedMuscle;
-
-        if (muscle == "Deltoid")
-        {
-            questions = new Question[]
-            {
-                new Question("What is the primary function of the Deltoid?",
-                    new string[]{"Arm Abduction","Knee Flexion","Finger Extension","Neck Rotation"},0),
-
-                new Question("Where is the Deltoid located?",
-                    new string[]{"Shoulder","Forearm","Chest","Leg"},0),
-
-                new Question("The Deltoid helps with?",
-                    new string[]{"Lifting the arm","Walking","Blinking","Breathing"},0),
-
-                new Question("The Deltoid is a ____ muscle.",
-                    new string[]{"Shoulder","Forearm","Back","Hip"},0),
-
-                new Question("The Deltoid stabilizes the?",
-                    new string[]{"Shoulder Joint","Elbow","Knee","Ankle"},0)
-            };
-        }
-
-        else if (muscle == "Biceps Brachii")
-        {
-            questions = new Question[]
-            {
-                new Question("The Biceps mainly performs?",
-                    new string[]{"Elbow Flexion","Knee Extension","Wrist Rotation","Hip Flexion"},0),
-
-                new Question("The Biceps is found in the?",
-                    new string[]{"Upper Arm","Forearm","Leg","Chest"},0),
-
-                new Question("The Biceps helps in?",
-                    new string[]{"Supination","Breathing","Walking","Chewing"},0),
-
-                new Question("The Biceps has how many heads?",
-                    new string[]{"Two","One","Three","Four"},0),
-
-                new Question("The Biceps crosses the?",
-                    new string[]{"Shoulder and Elbow","Knee","Ankle","Hip"},0)
-            };
-        }
-
-        else
-        {
-            questions = new Question[]
-            {
-                new Question(
-                    "Where is the " + muscle + " located?",
-                    new string[]{
-                        "Correct Region",
-                        "Leg",
-                        "Neck",
-                        "Foot"
-                    },
-                    0)
-            };
-        }
-    }
-
+void LoadQuestions()
+{
+    questions = QuestionDatabase
+        .GetQuestions(AppManager.Instance.SelectedMuscle)
+        .ToArray();
+}
+    
     void ShowQuestion()
     {
         if(currentQuestion >= questions.Length)
