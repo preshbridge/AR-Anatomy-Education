@@ -158,7 +158,7 @@ git clone  https://github.com/preshbridge/AR-Anatomy-Education/tree/main
 
 ## Demo Video
 
-(Add your 5-minute demonstration video link here.)
+(https://drive.google.com/file/d/1dO67Dm8hv_bh4nVKdXJJjBtlsO8SgjYn/view?usp=sharing)
 
 ---
 
