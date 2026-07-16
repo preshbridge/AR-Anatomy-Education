@@ -134,7 +134,7 @@ git clone  https://github.com/preshbridge/AR-Anatomy-Education/tree/main
 
 * Splash Screen <img width="540" height="1218" alt="WhatsApp Image 2026-07-13 at 20 38 20" src="https://github.com/user-attachments/assets/943284cd-b1e2-452a-85be-41a3cafb2242" />
 
-* Onboarding Screen <img width="540" height="1218" alt="image" src="https://github.com/user-attachments/assets/84c311a9-a9f0-4507-a6eb-e8f62452cd0d" />
+* Onboarding Screen <img width="485" height="1080" alt="image" src="https://github.com/user-attachments/assets/e39187a3-fab5-4932-bde4-3f0ab36f1610" />
 
 * Signup Screen <img width="540" height="1218" alt="WhatsApp Image 2026-07-13 at 21 58 36" src="https://github.com/user-attachments/assets/3802b789-6005-4bff-a455-772db39798f4" />
 
