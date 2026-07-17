@@ -33,7 +33,16 @@ void LoadQuestions()
         if(currentQuestion >= questions.Length)
         {
             PlayerPrefs.SetInt("QuizScore", score);
-            PlayerPrefs.SetInt("QuizTotal", questions.Length);
+PlayerPrefs.SetInt("QuizTotal", questions.Length);
+
+PlayerPrefs.SetInt("TotalQuestionsAnswered", questions.Length);
+
+float average =
+((float)score / questions.Length) * 100f;
+
+PlayerPrefs.SetFloat("AverageScore", average);
+
+PlayerPrefs.Save();
 
             SceneManager.LoadScene("ResultScene");
             return;
