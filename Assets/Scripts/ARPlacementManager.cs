@@ -5,21 +5,25 @@ using UnityEngine.XR.ARSubsystems;
 
 public class ARPlacementManager : MonoBehaviour
 {
-    [Header("Human Body Prefab")]
+    [Header("References")]
     public MuscleSpawner muscleSpawner;
+
     [SerializeField]
     private ARRaycastManager raycastManager;
 
-   public bool spawned = false;
+    private GameObject currentMuscle;
 
-private GameObject currentMuscle;
+    private bool spawned = false;
+
     static List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
     void Update()
     {
+        // Don't allow another muscle while one already exists
         if (spawned)
             return;
 
+        // Wait for touch
         if (Input.touchCount == 0)
             return;
 
@@ -27,57 +31,64 @@ private GameObject currentMuscle;
 
         if (touch.phase != TouchPhase.Began)
             return;
-            Debug.Log("Screen tapped");
 
-Debug.Log("Plane detected!");
+        Debug.Log("Screen Tapped");
+
+        // Check if a plane was touched
         if (raycastManager.Raycast(touch.position, hits, TrackableType.PlaneWithinPolygon))
         {
+            Debug.Log("Plane Detected");
+
             Pose pose = hits[0].pose;
 
-            // Raise the body slightly above the plane
-            Vector3 spawnPosition = pose.position + new Vector3(0f, 0.5f, 0f);
+            // Raise the model slightly above the plane
+            Vector3 spawnPosition = pose.position + Vector3.up * 0.5f;
 
-            // Spawn the model
-            Debug.Log("Selected Muscle: " + AppManager.Instance.SelectedMuscle);
             GameObject selectedMuscle = muscleSpawner.GetSelectedMusclePrefab();
-           Debug.Log("Selected Muscle: " + AppManager.Instance.SelectedMuscle);
 
-if(selectedMuscle != null)
-    Debug.Log("Prefab Found: " + selectedMuscle.name);
-else
-    Debug.Log("Prefab is NULL");
+            if (selectedMuscle == null)
+            {
+                Debug.LogError("No muscle prefab selected!");
+                return;
+            }
 
-if (selectedMuscle == null)
-{
-    Debug.Log("No muscle prefab found!");
-    return;
-}
+            Debug.Log("Spawning: " + selectedMuscle.name);
 
-currentMuscle = Instantiate(selectedMuscle, spawnPosition, Quaternion.identity);
-currentMuscle.AddComponent<ARObjectInteraction>();
+            // Spawn muscle
+            currentMuscle = Instantiate(selectedMuscle, spawnPosition, Quaternion.identity);
 
-            // Make the body face the user
-            Vector3 cameraPosition = Camera.main.transform.position;
+            // Add interaction script only if it doesn't already exist
+            if (currentMuscle.GetComponent<ARObjectInteraction>() == null)
+            {
+                currentMuscle.AddComponent<ARObjectInteraction>();
+            }
 
-            Vector3 lookDirection = cameraPosition - currentMuscle.transform.position;
+            // Face the camera
+            Vector3 lookDirection = Camera.main.transform.position - currentMuscle.transform.position;
             lookDirection.y = 0;
 
-            currentMuscle.transform.rotation = Quaternion.LookRotation(-lookDirection);
+            if (lookDirection != Vector3.zero)
+            {
+                currentMuscle.transform.rotation = Quaternion.LookRotation(-lookDirection);
+            }
 
-            // Adjust size
-            currentMuscle.transform.localScale = Vector3.one * 0.15f;
+            // Scale the muscle
+            currentMuscle.transform.localScale = Vector3.one * 0.25f;
+
             spawned = true;
         }
     }
 
     public void ResetPlacement()
-{
-    if (currentMuscle != null)
     {
-        Destroy(currentMuscle);
-    }
+        if (currentMuscle != null)
+        {
+            Destroy(currentMuscle);
+            currentMuscle = null;
+        }
 
-    currentMuscle = null;
-    spawned = false;
-}
+        spawned = false;
+
+        Debug.Log("Muscle Reset. Tap a plane to place another muscle.");
+    }
 }

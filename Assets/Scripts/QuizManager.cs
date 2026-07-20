@@ -76,4 +76,9 @@ PlayerPrefs.Save();
 
         ShowQuestion();
     }
+
+    public void GoBack()
+{
+    SceneManager.LoadScene("ARScene");
+}
 }

@@ -2097,7 +2097,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muscleSpawner: {fileID: 2016934314}
   raycastManager: {fileID: 210409569}
-  spawned: 0
 --- !u!4 &2016934313
 Transform:
   m_ObjectHideFlags: 0
