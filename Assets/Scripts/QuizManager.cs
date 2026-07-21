@@ -1,84 +1,166 @@
-using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using TMPro;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class QuizManager : MonoBehaviour
 {
     [Header("UI")]
+    public TMP_Text questionCounter;
     public TMP_Text questionText;
+
     public Button[] answerButtons;
     public TMP_Text[] answerTexts;
 
-    private int currentQuestion = 0;
-    private int score = 0;
+    public Button previousButton;
+    public Button nextButton;
+    public Button submitButton;
 
-    Question[] questions;
+    private List<Question> questions;
+
+    private int currentQuestion = 0;
+    private int[] selectedAnswers;
 
     void Start()
     {
-        LoadQuestions();
+        // Load questions for the selected muscle
+        questions = QuestionDatabase.GetQuestions(AppManager.Instance.SelectedMuscle);
+
+        // Initialize answer storage
+        selectedAnswers = new int[questions.Count];
+
+        for (int i = 0; i < selectedAnswers.Length; i++)
+            selectedAnswers[i] = -1;
+
+        // Initial button states
+        previousButton.interactable = false;
+        nextButton.interactable = false;
+        submitButton.gameObject.SetActive(false);
+
         ShowQuestion();
     }
-void LoadQuestions()
-{
-    questions = QuestionDatabase
-        .GetQuestions(AppManager.Instance.SelectedMuscle)
-        .ToArray();
-}
-    
+
     void ShowQuestion()
     {
-        if(currentQuestion >= questions.Length)
-        {
-            PlayerPrefs.SetInt("QuizScore", score);
-PlayerPrefs.SetInt("QuizTotal", questions.Length);
+        // Update Question Counter
+        questionCounter.text = "Question " + (currentQuestion + 1) + " of " + questions.Count;
 
-PlayerPrefs.SetInt("TotalQuestionsAnswered", questions.Length);
-
-float average =
-((float)score / questions.Length) * 100f;
-
-PlayerPrefs.SetFloat("AverageScore", average);
-
-PlayerPrefs.Save();
-
-            SceneManager.LoadScene("ResultScene");
-            return;
-        }
-
+        // Display Question
         questionText.text = questions[currentQuestion].question;
 
-        for(int i=0;i<4;i++)
+        // Display Answers
+        for (int i = 0; i < answerButtons.Length; i++)
         {
             answerTexts[i].text = questions[currentQuestion].answers[i];
 
             int index = i;
 
             answerButtons[i].onClick.RemoveAllListeners();
-
             answerButtons[i].onClick.AddListener(() =>
             {
-                CheckAnswer(index);
+                SelectAnswer(index);
             });
+
+            // Reset button color
+            ColorBlock colors = answerButtons[i].colors;
+            colors.normalColor = Color.white;
+            answerButtons[i].colors = colors;
+        }
+
+        // Restore previously selected answer
+        if (selectedAnswers[currentQuestion] != -1)
+        {
+            HighlightSelected(selectedAnswers[currentQuestion]);
+            nextButton.interactable = true;
+        }
+        else
+        {
+            nextButton.interactable = false;
+        }
+
+        // Previous Button
+        previousButton.interactable = currentQuestion > 0;
+
+        // Last Question
+        if (currentQuestion == questions.Count - 1)
+        {
+            nextButton.gameObject.SetActive(false);
+            submitButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            nextButton.gameObject.SetActive(true);
+            submitButton.gameObject.SetActive(false);
         }
     }
 
-    void CheckAnswer(int answer)
+    void SelectAnswer(int answerIndex)
     {
-        if(answer == questions[currentQuestion].correctAnswer)
+        selectedAnswers[currentQuestion] = answerIndex;
+
+        HighlightSelected(answerIndex);
+
+        nextButton.interactable = true;
+    }
+
+    void HighlightSelected(int answerIndex)
+    {
+        for (int i = 0; i < answerButtons.Length; i++)
         {
-            score++;
+            ColorBlock colors = answerButtons[i].colors;
+
+            if (i == answerIndex)
+                colors.normalColor = new Color(0.3f, 0.8f, 0.3f); // Green
+            else
+                colors.normalColor = Color.white;
+
+            answerButtons[i].colors = colors;
+        }
+    }
+
+    public void NextQuestion()
+    {
+        if (currentQuestion < questions.Count - 1)
+        {
+            currentQuestion++;
+            ShowQuestion();
+        }
+    }
+
+    public void PreviousQuestion()
+    {
+        if (currentQuestion > 0)
+        {
+            currentQuestion--;
+            ShowQuestion();
+        }
+    }
+
+    public void SubmitQuiz()
+    {
+        int score = 0;
+
+        for (int i = 0; i < questions.Count; i++)
+        {
+            if (selectedAnswers[i] == questions[i].correctAnswer)
+                score++;
         }
 
-        currentQuestion++;
+        PlayerPrefs.SetInt("QuizScore", score);
+        PlayerPrefs.SetInt("QuizTotal", questions.Count);
+        PlayerPrefs.SetInt("TotalQuestionsAnswered", questions.Count);
 
-        ShowQuestion();
+        float average = ((float)score / questions.Count) * 100f;
+        PlayerPrefs.SetFloat("AverageScore", average);
+
+        PlayerPrefs.Save();
+
+        SceneManager.LoadScene("ResultScene");
     }
 
     public void GoBack()
-{
-    SceneManager.LoadScene("ARScene");
-}
+    {
+        SceneManager.LoadScene("ARScene");
+    }
 }
