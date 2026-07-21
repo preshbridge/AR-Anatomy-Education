@@ -64,9 +64,93 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -8620061291980784375, guid: 222e02f42a649ba4aad510ca93679169, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7659419516096637707, guid: 222e02f42a649ba4aad510ca93679169, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7391475362428380560, guid: 222e02f42a649ba4aad510ca93679169, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6477125650230942204, guid: 222e02f42a649ba4aad510ca93679169, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5616551053512630319, guid: 222e02f42a649ba4aad510ca93679169, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4447472987372433821, guid: 222e02f42a649ba4aad510ca93679169, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3574227185728743805, guid: 222e02f42a649ba4aad510ca93679169, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1600604344616665519, guid: 222e02f42a649ba4aad510ca93679169, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -744436532182325293, guid: 222e02f42a649ba4aad510ca93679169, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 222e02f42a649ba4aad510ca93679169, type: 3}
       propertyPath: m_Name
       value: Deltoid.prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617048992373897728, guid: 222e02f42a649ba4aad510ca93679169, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2046054943601726698, guid: 222e02f42a649ba4aad510ca93679169, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990469640361832759, guid: 222e02f42a649ba4aad510ca93679169, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3078324153522953174, guid: 222e02f42a649ba4aad510ca93679169, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775428508133318212, guid: 222e02f42a649ba4aad510ca93679169, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344939336247838130, guid: 222e02f42a649ba4aad510ca93679169, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6095166829589121666, guid: 222e02f42a649ba4aad510ca93679169, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6638817378431544544, guid: 222e02f42a649ba4aad510ca93679169, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6971522624100910118, guid: 222e02f42a649ba4aad510ca93679169, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7157309607397930224, guid: 222e02f42a649ba4aad510ca93679169, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8568900376933055577, guid: 222e02f42a649ba4aad510ca93679169, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8808946834159684269, guid: 222e02f42a649ba4aad510ca93679169, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
