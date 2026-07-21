@@ -153,11 +153,22 @@ public TMP_Text forearmLocationText;
             //======================
 
             case "Brachioradialis":
-                forearmMuscleTitle.text = "Brachioradialis";
-                forearmDescriptionText.text = "The brachioradialis is a forearm muscle that bends the elbow, especially when the hand is in a neutral position.";
-                forearmFunctionText.text = "• Flexes the elbow\n• Assists forearm rotation";
-                forearmLocationText.text = "Lateral Forearm";
-                break;
+    forearmMuscleTitle.text = "Brachioradialis";
+
+    forearmDescriptionText.text =
+        "The brachioradialis is a superficial muscle located on the lateral side of the forearm. It is most active when the forearm is in a neutral (thumb-up) position and plays an important role in elbow flexion.";
+
+    forearmFunctionText.text =
+        "• Flexes the elbow\n" +
+        "• Assists in pronation and supination to return the forearm to the neutral position\n" +
+        "• Helps stabilize the elbow during movement";
+
+    forearmLocationText.text =
+        "Lateral Forearm\n" +
+        "Origin: Lateral supracondylar ridge of the humerus\n" +
+        "Insertion: Styloid process of the radius";
+
+    break;
 
             case "Flexor Carpi Radialis":
                 forearmMuscleTitle.text = "Flexor Carpi Radialis";
