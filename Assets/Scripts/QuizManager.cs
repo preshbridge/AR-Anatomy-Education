@@ -33,7 +33,6 @@ public class QuizManager : MonoBehaviour
         for (int i = 0; i < selectedAnswers.Length; i++)
             selectedAnswers[i] = -1;
 
-        // Initial button states
         previousButton.interactable = false;
         nextButton.interactable = false;
         submitButton.gameObject.SetActive(false);
@@ -43,6 +42,9 @@ public class QuizManager : MonoBehaviour
 
     void ShowQuestion()
     {
+        // Reset all button colours first
+        ResetButtonColors();
+
         // Update Question Counter
         questionCounter.text = "Question " + (currentQuestion + 1) + " of " + questions.Count;
 
@@ -61,14 +63,9 @@ public class QuizManager : MonoBehaviour
             {
                 SelectAnswer(index);
             });
-
-            // Reset button color
-            ColorBlock colors = answerButtons[i].colors;
-            colors.normalColor = Color.white;
-            answerButtons[i].colors = colors;
         }
 
-        // Restore previously selected answer
+        // Restore answer only if this question has been answered before
         if (selectedAnswers[currentQuestion] != -1)
         {
             HighlightSelected(selectedAnswers[currentQuestion]);
@@ -80,9 +77,10 @@ public class QuizManager : MonoBehaviour
         }
 
         // Previous Button
-        previousButton.interactable = currentQuestion > 0;
+        previousButton.gameObject.SetActive(true);
+        previousButton.interactable = (currentQuestion > 0);
 
-        // Last Question
+        // Next / Submit Buttons
         if (currentQuestion == questions.Count - 1)
         {
             nextButton.gameObject.SetActive(false);
@@ -104,22 +102,31 @@ public class QuizManager : MonoBehaviour
         nextButton.interactable = true;
     }
 
-   void HighlightSelected(int answerIndex)
-{
-    for (int i = 0; i < answerButtons.Length; i++)
+    void HighlightSelected(int answerIndex)
     {
-        Image img = answerButtons[i].GetComponent<Image>();
+        for (int i = 0; i < answerButtons.Length; i++)
+        {
+            Image image = answerButtons[i].GetComponent<Image>();
 
-        if (i == answerIndex)
-        {
-            img.color = new Color(0.2f, 0.7f, 0.2f); // Green
-        }
-        else
-        {
-            img.color = Color.white;
+            if (i == answerIndex)
+            {
+                image.color = new Color32(46, 204, 113, 255); // Green
+            }
+            else
+            {
+                image.color = Color.white;
+            }
         }
     }
-}
+
+    void ResetButtonColors()
+    {
+        for (int i = 0; i < answerButtons.Length; i++)
+        {
+            Image image = answerButtons[i].GetComponent<Image>();
+            image.color = Color.white;
+        }
+    }
 
     public void NextQuestion()
     {
@@ -156,9 +163,67 @@ public class QuizManager : MonoBehaviour
         float average = ((float)score / questions.Count) * 100f;
         PlayerPrefs.SetFloat("AverageScore", average);
 
+        string muscle = AppManager.Instance.SelectedMuscle;
+
+if (muscle == "Deltoid" ||
+    muscle == "Supraspinatus" ||
+    muscle == "Infraspinatus" ||
+    muscle == "Teres Minor" ||
+    muscle == "Subscapularis")
+{
+    float oldScore = PlayerPrefs.GetFloat("ShoulderProgress", 0);
+
+    if (average > oldScore)
+        PlayerPrefs.SetFloat("ShoulderProgress", average);
+}
+
+else if (muscle == "Biceps Brachii" ||
+         muscle == "Brachialis" ||
+         muscle == "Coracobrachialis" ||
+         muscle == "Triceps Brachii")
+{
+    float oldScore = PlayerPrefs.GetFloat("UpperArmProgress", 0);
+
+    if (average > oldScore)
+        PlayerPrefs.SetFloat("UpperArmProgress", average);
+}
+
+else if (muscle == "Brachioradialis" ||
+         muscle == "Flexor Carpi Radialis" ||
+         muscle == "Palmaris Longus" ||
+         muscle == "Flexor Carpi Ulnaris")
+{
+    float oldScore = PlayerPrefs.GetFloat("ForearmProgress", 0);
+
+    if (average > oldScore)
+        PlayerPrefs.SetFloat("ForearmProgress", average);
+}
+
+PlayerPrefs.Save();
+
         PlayerPrefs.Save();
 
-        SceneManager.LoadScene("ResultScene");
+ProgressManager.Instance.SaveQuizResult(
+    AppManager.Instance.SelectedMuscle,
+    score,
+    questions.Count
+);
+
+PlayerPrefs.SetInt("QuestionCount", questions.Count);
+
+for (int i = 0; i < questions.Count; i++)
+{
+    PlayerPrefs.SetInt("UserAnswer_" + i, selectedAnswers[i]);
+    PlayerPrefs.SetInt("CorrectAnswer_" + i, questions[i].correctAnswer);
+    PlayerPrefs.SetString("Question_" + i, questions[i].question);
+
+    PlayerPrefs.SetString("Option0_" + i, questions[i].answers[0]);
+    PlayerPrefs.SetString("Option1_" + i, questions[i].answers[1]);
+    PlayerPrefs.SetString("Option2_" + i, questions[i].answers[2]);
+    PlayerPrefs.SetString("Option3_" + i, questions[i].answers[3]);
+}
+
+SceneManager.LoadScene("ResultScene");
     }
 
     public void GoBack()
