@@ -104,20 +104,22 @@ public class QuizManager : MonoBehaviour
         nextButton.interactable = true;
     }
 
-    void HighlightSelected(int answerIndex)
+   void HighlightSelected(int answerIndex)
+{
+    for (int i = 0; i < answerButtons.Length; i++)
     {
-        for (int i = 0; i < answerButtons.Length; i++)
+        Image img = answerButtons[i].GetComponent<Image>();
+
+        if (i == answerIndex)
         {
-            ColorBlock colors = answerButtons[i].colors;
-
-            if (i == answerIndex)
-                colors.normalColor = new Color(0.3f, 0.8f, 0.3f); // Green
-            else
-                colors.normalColor = Color.white;
-
-            answerButtons[i].colors = colors;
+            img.color = new Color(0.2f, 0.7f, 0.2f); // Green
+        }
+        else
+        {
+            img.color = Color.white;
         }
     }
+}
 
     public void NextQuestion()
     {
