@@ -25,8 +25,11 @@ public class QuizManager : MonoBehaviour
     void Start()
     {
         // Load questions for the selected muscle
-        questions = QuestionDatabase.GetQuestions(AppManager.Instance.SelectedMuscle);
+        Debug.Log("Selected Muscle = " + AppManager.Instance.SelectedMuscle);
 
+questions = QuestionDatabase.GetQuestions(AppManager.Instance.SelectedMuscle);
+
+Debug.Log("Questions Loaded = " + questions.Count);
         // Initialize answer storage
         selectedAnswers = new int[questions.Count];
 
@@ -214,11 +217,11 @@ else
             PlayerPrefs.SetFloat("ForearmProgress", average);
     }
 
-    ProgressManager.Instance.SaveQuizResult(
-        AppManager.Instance.SelectedMuscle,
-        score,
-        questions.Count
-    );
+    // ProgressManager.Instance.SaveQuizResult(
+//     AppManager.Instance.SelectedMuscle,
+//     score,
+//     questions.Count
+// );
 
     PlayerPrefs.SetInt("QuestionCount", questions.Count);
 

@@ -3049,7 +3049,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 993627460}
         m_TargetAssemblyTypeName: QuizManager, Assembly-CSharp
-        m_MethodName: GoBack
+        m_MethodName: SubmitQuiz
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

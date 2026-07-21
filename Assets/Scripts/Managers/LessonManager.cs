@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System;
 
 public class LessonManager : MonoBehaviour
 {
@@ -73,10 +74,14 @@ public TMP_Text forearmLocationText;
         }
     }
 
-    void LoadLesson()
+   void LoadLesson()
+{
+    string muscle = AppManager.Instance.SelectedMuscle;
+
+    Debug.Log("Selected Muscle = [" + muscle + "]");
+
+    switch (muscle.Trim())
     {
-        switch (AppManager.Instance.SelectedMuscle)
-        {
             //======================
             // SHOULDER
             //======================
@@ -192,7 +197,10 @@ public TMP_Text forearmLocationText;
                 break;
 
            default:
-    shoulderMuscleTitle.text = "Muscle Not Found";
+
+    Debug.LogError("Muscle NOT FOUND: " + muscle);
+
+    shoulderMuscleTitle.text = "";
     shoulderDescriptionText.text = "";
     shoulderFunctionText.text = "";
     shoulderLocationText.text = "";
@@ -202,10 +210,11 @@ public TMP_Text forearmLocationText;
     upperArmFunctionText.text = "";
     upperArmLocationText.text = "";
 
-    forearmMuscleTitle.text = "";
-    forearmDescriptionText.text = "";
+    forearmMuscleTitle.text = "Muscle Not Found";
+    forearmDescriptionText.text = muscle;
     forearmFunctionText.text = "";
     forearmLocationText.text = "";
+
     break;
         }
     }
