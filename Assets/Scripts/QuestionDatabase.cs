@@ -33,8 +33,8 @@ public static class QuestionDatabase
             case "Triceps Brachii":
                 return GetTricepsQuestions();
 
-            case "Brachioradialis":
-                return GetBrachioradialisQuestions();
+          case "Brachioradialis":
+    return GetBrachioradialisQuestions();
 
             case "Flexor Carpi Radialis":
                 return GetFlexorCarpiRadialisQuestions();
