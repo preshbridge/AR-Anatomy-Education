@@ -134,7 +134,7 @@ git clone  https://github.com/preshbridge/AR-Anatomy-Education/tree/main
 
 * Splash Screen <img width="540" height="1218" alt="WhatsApp Image 2026-07-13 at 20 38 20" src="https://github.com/user-attachments/assets/943284cd-b1e2-452a-85be-41a3cafb2242" />
 
-* Onboarding Screen <img width="485" height="1080" alt="image" src="https://github.com/user-attachments/assets/e39187a3-fab5-4932-bde4-3f0ab36f1610" />
+* Onboarding Screen <img width="253" height="493" alt="Screenshot (293)" src="https://github.com/user-attachments/assets/b131ef76-1136-4b5d-9b47-8652e4b6bf8f" />
 
 * Signup Screen <img width="540" height="1218" alt="WhatsApp Image 2026-07-13 at 21 58 36" src="https://github.com/user-attachments/assets/3802b789-6005-4bff-a455-772db39798f4" />
 
@@ -142,7 +142,7 @@ git clone  https://github.com/preshbridge/AR-Anatomy-Education/tree/main
 
 * Welcome message  <img width="540" height="1218" alt="image" src="https://github.com/user-attachments/assets/ada078d7-db41-49ca-842a-4c9028cb4f37" />
 
-* Home Screen <img width="540" height="1218" alt="image" src="https://github.com/user-attachments/assets/7aa60906-e507-4cb4-8332-946d1498fd34" />
+* Home Screen <img width="279" height="539" alt="Screenshot (294)" src="https://github.com/user-attachments/assets/6d63db74-fd24-4e8a-a58c-900419df9a1b" />
 
 * Study Screen <img width="540" height="1218" alt="image" src="https://github.com/user-attachments/assets/94ab3ca4-fc21-4774-a206-e4c0b0435a32" />
 
@@ -150,7 +150,7 @@ git clone  https://github.com/preshbridge/AR-Anatomy-Education/tree/main
 
 * Lesson Screen <img width="540" height="1218" alt="image" src="https://github.com/user-attachments/assets/feb80179-6f29-4b93-b839-474c598b4d56" />
 
-* AR View <img width="485" height="1080" alt="WhatsApp Image 2026-07-16 at 17 22 46" src="https://github.com/user-attachments/assets/5075e215-47a2-4b3a-abb4-e7b199286831" />
+* AR View <img width="498" height="1080" alt="WhatsApp Image 2026-07-22 at 00 11 39" src="https://github.com/user-attachments/assets/1ee45847-9fac-4984-8fd1-5d139d62a618" />
 
 
 
